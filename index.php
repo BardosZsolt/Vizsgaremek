@@ -1,6 +1,19 @@
 <?php
 
 session_start();
+include("kapcsolat.php");
+
+$ip=$_SERVER["REMOTE_ADDR"];
+$sess=substr(session_id(),0 ,8);
+if(!isset($_SESSION['uid'])){
+  $uid = 0;
+}                    
+$url = $_SERVER['REQUEST_URI'];
+
+if(isset($ip)){}
+mysqli_query($db, "
+INSERT INTO naplo (nid , ndatum, nip, nsession, nuid, nurl)
+VALUES            (NULL, NOW(), '$ip','$sess','$uid','$url')");
 
 ?>
 
@@ -27,6 +40,7 @@ session_start();
           <li><a href="gallery.php">GALLERY</a></li>
           <li><a href="shop.php">SHOP</a></li>
           <li><a href="products.php">PRODUCTS</a></li>
+
           <?php
           if(!isset($_SESSION["uid"])) {
             echo '<li><a href="bejelentkezes.php">Bejelentkezés</a></li>';
