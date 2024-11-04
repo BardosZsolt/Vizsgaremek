@@ -20,15 +20,7 @@
   <div class="container">
     <div class="navbar">
       <img src="images/logo2.png" alt="logo">
-      <nav>
-        <ul>
-          <li><a href="kezdolap.html">HOME</a></li>
-          <li><a href="about.html">ABOUT</a></li>
-          <li><a href="gallery.html">GALLERY</a></li>
-          <li><a href="shop.html">SHOP</a></li>
-          <li><a href="products.html">PRODUCTS</a></li>
-        </ul>
-      </nav>
+      <?php include("navbar.php"); ?>
     </div>
   </div>
   </div>

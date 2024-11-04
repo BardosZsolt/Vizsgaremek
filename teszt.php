@@ -9,13 +9,6 @@
     </title>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="#">Menüpont 1</a></li>
-            <li><a href="#">Menüpont 2</a></li>
-            <li><a href="#">Menüpont 3</a></li>
-            <li><a href="#">Menüpont 4</a></li>
-          </ul>
-        </nav>
+<?php include("navbar.php"); ?>
 </body>
 </html>

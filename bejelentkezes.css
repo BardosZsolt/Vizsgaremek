@@ -1,0 +1,111 @@
+/* Általános body és container stílusok */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #222; /* Sötét háttér az oldalnak */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    color: #fff; /* Fehér szöveg */
+}
+
+/* Bejelentkezési felület háttér és formázás */
+.container {
+    background-color: #333; /* Sötétebb háttér a bejelentkezési felülethez */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    opacity: 0; /* Animációhoz */
+    animation: fadeIn 1.5s ease-out forwards; /* Animáció a megjelenéshez */
+}
+
+/* Animáció a bejelentkezési felület megjelenéséhez */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) scale(0.9);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateY(0) scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Cím stílus */
+h2 {
+    color: #fff; /* Fehér szöveg a címhez */
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Címkék */
+label {
+    font-size: 14px;
+    color: #ccc; /* Világosabb szín a címkékhez */
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+/* Input mezők */
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #555; /* Sötét keret */
+    border-radius: 5px;
+    background-color: #444; /* Sötétebb háttér az inputokhoz */
+    color: #fff; /* Fehér szöveg az inputokban */
+}
+
+/* Gomb stílus */
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Link a regisztrációs oldalhoz */
+p {
+    margin-top: 20px;
+}
+
+p a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+/* Vissza a főoldalra gomb stílus */
+.back-home {
+    background-color: #f44336; /* Piros szín */
+}
+
+.back-home:hover {
+    background-color: #e53935; /* Sötétebb piros */
+}

@@ -12,14 +12,7 @@
     <div class="container">
         <div class="navbar">
           <img src="images/logo2.png" alt="logo">
-          <nav>
-            <ul>
-              <li><a href="index.php">HOME</a></li>
-              <li><a href="about.php">ABOUT</a></li>
-              <li><a href="gallery.php">GALLERY</a></li>
-              <li><a href="shop.php">SHOP</a></li>
-            </ul>
-          </nav>
+          <?php include("navbar.php"); ?>
         </div>
 
         <div class="col">

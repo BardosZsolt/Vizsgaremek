@@ -160,26 +160,7 @@ h5{
   <div class="container">
     <div class="navbar">
       <img src="images/logo2.png" alt="logo">
-      <nav>
-        <ul>
-          <li><a href="index.php">HOME</a></li>
-          <li><a href="about.php">ABOUT</a></li>
-          <li><a href="gallery.php">GALLERY</a></li>
-          <li><a href="shop.php">SHOP</a></li>
-          <li><a href="products.php">PRODUCTS</a></li>
-          <li><a href="regisztracio.php">Regisztráció</a></li>
-          <?php
-          if(!isset($_SESSION["uid"])) {
-            echo '<li><a href="bejelentkezes.php">Bejelentkezés</a></li>';
-            echo '<li style="color: red;">Nem vagy bejelentkezve!</li>';
-          }
-          else {
-            echo '<li><a href="kijelentkezes.php">Kijelentkezes</a></li>';
-            echo '<li style="color: red;">'.$_SESSION["unick"].'</li>';
-          }
-          ?>
-        </ul>
-      </nav>
+      <?php include("navbar.php"); ?>
     </div>
     <div class="row">
       <div class="col">
