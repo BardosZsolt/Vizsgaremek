@@ -1,7 +1,7 @@
-/* General body and container styling */
+/* Általános body és container stílusok */
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f4f4f4;
+    background-color: #222; /* Sötét háttér az oldalnak */
     margin: 0;
     padding: 0;
     display: flex;
@@ -9,9 +9,23 @@ body {
     align-items: center;
     height: 100vh;
     overflow: hidden;
+    color: #fff; /* Fehér szöveg */
 }
 
-/* Animation for the container to fade in with a bounce effect */
+/* Bejelentkezési felület háttér és formázás */
+.container {
+    background-color: #333; /* Sötétebb háttér a bejelentkezési felülethez */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    opacity: 0; /* Animációhoz */
+    animation: fadeIn 1.5s ease-out forwards; /* Animáció a megjelenéshez */
+}
+
+/* Animáció a bejelentkezési felület megjelenéséhez */
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -27,85 +41,36 @@ body {
     }
 }
 
-/* Glowing border animation for input focus */
-@keyframes inputFocus {
-    0% {
-        box-shadow: 0 0 0px rgba(76, 175, 80, 0.8);
-    }
-    100% {
-        box-shadow: 0 0 10px rgba(76, 175, 80, 0.8);
-    }
-}
-
-/* Button hover bounce effect */
-@keyframes buttonBounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-5px);
-    }
-}
-
-/* Container Styling with animation */
-.container {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-    opacity: 0;
-    animation: fadeIn 1.5s ease-out forwards;
-}
-
-/* Heading */
+/* Cím stílus */
 h2 {
-    color: #333;
+    color: #fff; /* Fehér szöveg a címhez */
     margin-bottom: 20px;
     font-size: 24px;
-    animation: fadeIn 2s ease-out forwards;
 }
 
-/* Labels */
+/* Címkék */
 label {
     font-size: 14px;
-    color: #666;
+    color: #ccc; /* Világosabb szín a címkékhez */
     display: block;
     text-align: left;
     margin-bottom: 5px;
-    transition: color 0.3s ease-in-out;
 }
 
-label:hover {
-    color: #4CAF50;
-}
-
-/* Input fields */
+/* Input mezők */
 input[type="text"],
 input[type="email"],
 input[type="password"] {
     width: 100%;
     padding: 12px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
+    border: 1px solid #555; /* Sötét keret */
     border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 14px;
-    transition: box-shadow 0.3s ease-in-out;
+    background-color: #444; /* Sötétebb háttér az inputokhoz */
+    color: #fff; /* Fehér szöveg az inputokban */
 }
 
-/* Focus animation for input fields */
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus {
-    animation: inputFocus 0.5s ease-in-out forwards;
-    border: 1px solid #4CAF50;
-    outline: none;
-}
-
-/* Submit button with bounce effect */
+/* Gomb stílus */
 button[type="submit"] {
     width: 100%;
     padding: 12px;
@@ -115,15 +80,14 @@ button[type="submit"] {
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
 button[type="submit"]:hover {
     background-color: #45a049;
-    animation: buttonBounce 0.5s ease-in-out;
 }
 
-/* Link to login page */
+/* Link a regisztrációs oldalhoz */
 p {
     margin-top: 20px;
 }
@@ -132,100 +96,17 @@ p a {
     color: #4CAF50;
     text-decoration: none;
     font-weight: bold;
-    transition: color 0.3s ease;
 }
 
 p a:hover {
-    color: #333;
+    text-decoration: underline;
 }
 
-/* Eye icon (optional for password fields) */
-input.eye {
-    position: relative;
-    padding-right: 40px;
-}
-
-.eye::after {
-    content: "👁️";
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-.eye:hover::after {
-    transform: scale(1.1) translateY(-50%);
-}
-
-
-.container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-}
-
-h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin: 10px 0 5px;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-/* Gomb alap stílusok */
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50; /* Zöld szín */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-bottom: 10px;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Animáció */
-}
-
-/* Hover hatás */
-button:hover {
-    background-color: #45a049; /* Sötétebb zöld */
-    transform: translateY(-2px); /* Felemelkedik a gomb */
-}
-
-/* Stílus a "Vissza a főoldalra" gombhoz */
+/* Vissza a főoldalra gomb stílus */
 .back-home {
     background-color: #f44336; /* Piros szín */
 }
 
 .back-home:hover {
     background-color: #e53935; /* Sötétebb piros */
-    transform: translateY(-2px); /* Felemelkedik a gomb */
-}
-
-p {
-    margin-top: 10px;
-}
-
-a {
-    text-decoration: none;
-    color: #4CAF50;
-}
-
-a:hover {
-    text-decoration: underline;
 }

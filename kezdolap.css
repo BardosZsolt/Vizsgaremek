@@ -31,15 +31,46 @@ nav{
     flex: 1;
     text-align: right;
 }
-nav ul li{
+nav ul {
     list-style: none;
+}
+nav ul li {
     display: inline-block;
     margin-left: 60px;
+    color: #fff;
 }
-nav ul li a{
+nav ul li a {
     text-decoration: none;
     color: #fff;
     font-size: 13px;
+}
+.user-status {
+    display: inline-block;
+    color: white;
+    position: relative;
+}
+.user-status:hover .submenu {
+    display: block;
+}
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+    min-width: 150px;
+}
+.submenu a {
+    display: block;
+    color: #fff;
+    padding: 5px;
+    text-decoration: none;
+    text-align: center  ;
+}
+.submenu a:hover {
+    background-color: #555;
 }
 .row{
     display: flex;
@@ -69,7 +100,6 @@ button{
     outline: none;
     margin-top: 30px;
 }
-
 .card{
     width: 234px;
     height: 250px;
@@ -86,7 +116,6 @@ button{
     transform: translateX(350px);
     opacity: 1;
     transition: border-color 0.3s;
-
 }
 .card1{
     background-image: url(images/img1.jpg);
@@ -133,30 +162,16 @@ button{
 .card15{
     background-image: url(images/img15.jpg);
 }
-
-
 h5{
     color: #fff;
     font: bold;
     text-shadow: 2px 2px #000000;
-    
 }
-
 .card p{
     text-shadow: 0 0 15px #000;
     font-size: 8px;
 }
+ion-icon {
+    font-size: 32px;
 
-nav ul li a {
-    color: white; /* Alapértelmezett szín */
-    text-decoration: none;
-    padding: 10px;
-    transition: 0.3s ease; /* Finom átmenet */
   }
-  
-  nav ul li a:hover {
-    color: #ff5733; /* Szín amikor a kurzor a menüpontra kerül */
-    background-color: rgba(255, 255, 255, 0.1); /* Háttérszín effektek */
-    border-radius: 5px; /* Kerekített sarkok */
-  }
-  

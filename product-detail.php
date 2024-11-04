@@ -22,11 +22,11 @@
       <img src="images/logo2.png" alt="logo">
       <nav>
         <ul>
-          <li><a href="index.php">HOME</a></li>
-          <li><a href="about.php">ABOUT</a></li>
-          <li><a href="gallery.php">GALLERY</a></li>
-          <li><a href="shop.php">SHOP</a></li>
-          <li><a href="products.php">PRODUCTS</a></li>
+          <li><a href="kezdolap.html">HOME</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="gallery.html">GALLERY</a></li>
+          <li><a href="shop.html">SHOP</a></li>
+          <li><a href="products.html">PRODUCTS</a></li>
         </ul>
       </nav>
     </div>
