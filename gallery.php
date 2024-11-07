@@ -1,21 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="gallery.css">
-    <link rel="shortcut icon" type="image/jpg" href="images/writing-text.png"/>
-    <title>Gallery</title>
-</head>
-<body>
-    <div class="container">
-        <div class="navbar">
-          <img src="images/logo2.png" alt="logo">
-          <?php include("navbar.php"); ?>
-        </div>
 
-        <div class="col">
+
+<div style='clear:both;'></div>
+
+        <div class="col" style='margin-top:1500px; overflow:scroll;'>
             <div class="card card1"></div>
             <div class="card card2"></div>
             <div class="card card3"></div>
@@ -31,6 +18,4 @@
             <div class="card card13"></div> 
             <div class="card card14"></div> 
             <div class="card card15"></div> 
-             
-</body>
-</html>
+        <div>             

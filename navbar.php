@@ -1,9 +1,9 @@
 <nav>
         <ul>
           <li><a href="index.php">HOME</a></li>
-          <li><a href="about.php">ABOUT</a></li>
-          <li><a href="gallery.php">GALLERY</a></li>
-          <li><a href="shop.php">SHOP</a></li>
+          <li><a href="./?p=about">ABOUT</a></li>
+          <li><a href="./?p=galery">GALLERY</a></li>
+          <li><a href="./?p=shop">SHOP</a></li>
           <li class="user-status">
             <?php
             if (!isset($_SESSION["uid"])) {
