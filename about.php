@@ -8,8 +8,7 @@
     <link rel="shortcut icon" type="image/jpg" href="images/writing-text.png"/>
   </head>
   <body>
-    <img src="images/trapstar.png" />
-    <?php include("navbar.php"); ?>
+    <img src="images/trapstar.png" class="bigimg"/>
     <div class="flex-container">
       <div>
         <h2>Trapstar</h2>
@@ -20,8 +19,8 @@
           <h2>Kollekciók</h2>
         <p>A Trapstar kollekciói közé tartoznak pulóverek, pólók, kabátok, sapkák és kiegészítők, amelyeket rendszeresen frissítenek az új stílusok és trendek tükrözésére. A márkára jellemző az innováció és a kreativitás, amelyek egyesítik az utcakultúrát és a divatot egy egyedülálló és megkülönböztető stílusban.</p>
       </div>
-      <div class="img">
-        <img src="images/img3.jpg" style="object-fit: cover" />
+      <div>
+        <img src="images/img3.jpg" style="object-fit: cover" class="bigimg"/>
       </div>
     </div>
   </body>

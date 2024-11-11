@@ -1,4 +1,10 @@
-<div class="col">
+<div class="row">
+      <div class="col">
+        <a href="https://fontmeme.com/trapstar-logo-font/"><img src="https://fontmeme.com/permalink/240213/d4e18533d67d2886f30a4187482b70cf.png" alt="trapstar-logo-font" border="0"></a>        
+        <p>A Trapstar egy brit divatmárka, amely streetwear stílusban készült ruházatot kínál, jellemzően hip-hop és urban kultúrával összefonódó dizájnokkal és motívumokkal. A márka elismert a minőségi anyagok és az egyedi tervezésű ruhadarabok iránti elkötelezettségével.</p>
+        <a href="shop.html" target="_blank"><button type="button">Explore</button></a> 
+      </div>
+      <div class="col">
       <a href="gallery.html" target="_blank">
           <div class="card card1">
             <h5>Gallery</h5>
@@ -22,3 +28,6 @@
           <p></p>
         </div>
       </div>
+
+    </div>
+

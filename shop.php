@@ -17,13 +17,8 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="navbar">
-      <img src="images/logo2.png" alt="logo">
-      <?php include("navbar.php"); ?>
-    </div>
-  </div>
-  </div>
+
+    
 
   <!---------FEATURED CATEGORIES--------->
   <div class="categories">
@@ -295,7 +290,7 @@
       <p class="copyrigt">Copyright 2024 - Kornel Project.</p>
     </div>
 
-  </div>
+
 
 </body>
 

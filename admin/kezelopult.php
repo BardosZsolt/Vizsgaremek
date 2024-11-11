@@ -46,8 +46,8 @@ div#menu a:hover
       else           $p=""                ;
 
       if( $p=="userek")     include("userek.php");
-      if( $p=="termekek")   include("termekek.php");
-      if( $p=="rendelesek")  include("rendelesek.php");
+      if( $p=="termekek")   include("products.php");
+      if( $p=="rendelesek")  include("orders.php");
       
 
 ?>

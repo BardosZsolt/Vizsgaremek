@@ -16,7 +16,7 @@ session_start();
 <body>
   <style>
     .container{
-      overflow: hidden !important;
+      overflow-x: hidden !important;
     }
   </style>
   <div class="container">
@@ -24,20 +24,7 @@ session_start();
       <img src="images/logo2.png" alt="logo">
       <?php include("navbar.php"); ?>
     </div>
-    <div class="row">
-      <div class="col">
-        <a href="https://fontmeme.com/trapstar-logo-font/"><img src="https://fontmeme.com/permalink/240213/d4e18533d67d2886f30a4187482b70cf.png" alt="trapstar-logo-font" border="0"></a>        
-        <p>A Trapstar egy brit divatmárka, amely streetwear stílusban készült ruházatot kínál, jellemzően hip-hop és urban kultúrával összefonódó dizájnokkal és motívumokkal. A márka elismert a minőségi anyagok és az egyedi tervezésű ruhadarabok iránti elkötelezettségével.</p>
-        <a href="shop.html" target="_blank"><button type="button">Explore</button></a> 
-      </div>
-
-
-
-    
-
-
-
-      <?php
+    <?php
           if( isset($_GET['p']) )  $p = $_GET['p']  ;
           else                     $p = "" ;
           
@@ -47,9 +34,7 @@ session_start();
           if( $p==  "home"   )  include("index.php"  )    ;  else
                                 include("kezdolap.php")   ;
       ?>
-
-
-    </div>
+    
   </div>
 </body>
 </html>
