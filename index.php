@@ -15,7 +15,7 @@ session_start();
 </head>
 <body>
   <style>
-    .container{
+    .container {
       overflow-x: hidden !important;
     }
   </style>
@@ -25,16 +25,25 @@ session_start();
       <?php include("navbar.php"); ?>
     </div>
     <?php
-          if( isset($_GET['p']) )  $p = $_GET['p']  ;
-          else                     $p = "" ;
-          
-          if( $p == "galery" )  include("gallery.php")    ;  else 
-          if( $p==  "shop"   )  include("shop.php"   )    ;  else
-          if( $p==  "about"  )  include("about.php"  )    ;  else
-          if( $p==  "home"   )  include("index.php"  )    ;  else
-                                include("kezdolap.php")   ;
-      ?>
-    
+      // Az oldal kiválasztása az URL-ből
+      $p = isset($_GET['p']) ? $_GET['p'] : "";
+
+      // Tartalom betöltése a "p" paraméter alapján
+      switch ($p) {
+        case "galery":
+          include("gallery.php");
+          break;
+        case "shop":
+          include("shop.php");
+          break;
+        case "about":
+          include("about.php");
+          break;
+        default:
+          include("kezdolap.php"); // Alapértelmezett kezdőlap
+          break;
+      }
+    ?>
   </div>
 </body>
 </html>
