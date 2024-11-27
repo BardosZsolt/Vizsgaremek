@@ -1,121 +1,96 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Kosár inicializálása, ha még nem létezik
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+
+// Ellenőrizzük, hogy van-e bármilyen termék a kosárban
+if (empty($_SESSION['cart'])) {
+    echo "<h1>A kosarad üres!</h1>";
+    echo '<a href="./?p=shop">Vissza a boltba</a>';
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All Products</title>
-  <link rel="stylesheet" href="shop.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-  <link rel="shortcut icon" type="image/jpg" href="images/writing-text.png" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css"
-    integrity="sha384-BY+fdrpOd3gfeRvTSMT+VUZmA728cfF9Z2G42xpaRkUGu2i3DyzpTURDo5A6CaLK" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
-    integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="shop.css">
 </head>
-
 <body>
-  <div class="container">
-    <div class="navbar">
-      <img src="images/logo2.png" alt="logo">
-      <?php include("navbar.php"); ?>
-    </div>
-  </div>
-  </div>
+    <h1>Your Shopping Cart</h1>
+    <div class="cart-items">
+        <?php
+        $total = 0;
 
+        // Kosár tételek megjelenítése
+        foreach ($_SESSION['cart'] as $index => $item) {
+            $item_total = $item['price'] * $item['quantity'];
+            $total += $item_total;
 
-<!------cart items details------->
-<div class="small-container cart-page">
-    <table>
-        <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Subtotal</th>
-        </tr>
-        <tr>
-            <td>
-                <div class="cart-info">
-                    <img src="images/product-8.jpg">
-                    <div>
-                        <p>Trapstar Decoded Tee</p>
-                        <small>Price:£45.00 </small>
-                        <br>
-                        <a href="">Remove</a>
-                    </div>
-                </div>
-            </td>
-            <td><input type="number" value="1"></td>
-            <td>£45.00</td>
-        </tr>
-    </table>
+            echo '<div class="cart-item">';
+            echo '<h4>' . $item['name'] . '</h4>';
+            echo '<p>Size: ' . $item['size'] . '</p>';
+            echo '<p>Quantity: ' . $item['quantity'] . '</p>';
+            echo '<p>Price: £' . $item_total . '</p>';
+            echo '<button onclick="removeItem(' . $index . ')">Törlés</button>';
+            echo '</div>';
+        }
+        ?>
+        <h2>Total: £<?php echo number_format($total, 2); ?></h2>
 
-    <div class="total-price">
-        <table>
-            <tr>
-                <td>Subtotal</td>
-                <td>£45.00</td>
-            </tr>
-            <tr>
-                <td>Tax</td>
-                <td>£20.00</td>
-            </tr>
-            <tr>
-                <td>Total</td>
-                <td>£65.00</td>
-            </tr>
-        </table>
-    </div>
-</div>
+        <!-- Kosár törlése gomb -->
+        <button onclick="clearCart()">Kosár Törlése</button>
 
-
-
-  
-  
-
-  <!---------footer--------->
-
-  <div class="footer">
-    <div class="containter">
-      <div class="row">
-        <div class="footer-col-1">
-          <h3>Download Our App</h3>
-          <p>Download App for Android and ios mobile phone.</p>
-          <div class="app-logo">
-            <img src="images/getit.png">
-          </div>
-        </div>
-        <div class="footer-col-2">
-          <img src="images/logo2.png">
-          <p>Our Purpose Is To Sustainably Make the Pleasure and Benefits of Sport Accessible to the Many.</p>
-        </div>
-        <div class="footer-col-3">
-          <h3>Useful Links</h3>
-          <ul>
-            <li>Coupons</li>
-            <li>Blog Post</li>
-            <li>Return Policy</li>
-            <li>Join Affiliate</li>
-          </ul>
-        </div>
-        <div class="footer-col-4">
-          <h3>Follow us</h3>
-          <ul>
-            <li>Facebook</li>
-            <li>Twitter</li>
-            <li>Instagram</li>
-            <li>YouTube</li>
-          </ul>
-
-        </div>
-
-      </div>
-      <hr>
-      <p class="copyrigt">Copyright 2024 - Kornel Project.</p>
+        <!-- Vásárlás folytatása -->
+        <a href="./?p=shop" class="btn">Continue Shopping</a>
     </div>
 
-  </div>
+    <script>
+    // Kosár teljes törlése
+    function clearCart() {
+        fetch("cart_action.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ action: "clearCart" })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                alert(data.message);
+                location.reload(); // Frissítjük az oldalt
+            }
+        })
+        .catch(error => console.error("Hiba a kosár törlésekor:", error));
+    }
 
+    // Egy termék törlése a kosárból
+    function removeItem(index) {
+        fetch("cart_action.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ action: "removeItem", index: index })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                alert(data.message);
+                location.reload(); // Frissítjük az oldalt
+            }
+        })
+        .catch(error => console.error("Hiba a tétel törlésekor:", error));
+    }
+    </script>
 </body>
 </html>

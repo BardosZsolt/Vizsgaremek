@@ -59,6 +59,9 @@
         </div>
     </div>
 
+    <!-- Kosár törlése gomb -->
+    <button class="btn-clear" onclick="clearCart()">Kosár törlése</button>
+
     <script>
     let currentPrice = 0;
 
@@ -83,15 +86,60 @@
     }
 
     function addToCart() {
+        const name = document.getElementById("modal-name").innerText;
+        const price = parseFloat(document.getElementById("modal-price").innerText.replace("£", ""));
         const size = document.getElementById("size").value;
-        const quantity = document.getElementById("quantity").value;
+        const quantity = parseInt(document.getElementById("quantity").value);
 
         if (size === "Select Size") {
-            alert("Please select a size before adding to cart.");
-        } else {
-            alert(`You have added ${quantity} items of size ${size} to your cart.`);
-            // Implement cart functionality here (e.g., store the item in a session, localStorage, or database)
+            alert("Kérlek, válassz méretet!");
+            return;
         }
+
+        // AJAX hívás a kosár frissítéséhez
+        fetch("cart_action.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                action: "addToCart",
+                name: name,
+                price: price,
+                size: size,
+                quantity: quantity
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                alert(data.message);
+                updateCartCount();
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => console.error("Hiba:", error));
+    }
+
+    function clearCart() {
+        fetch("cart_action.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                action: "clearCart"
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                alert(data.message);
+                window.location.href = "shop.php"; // Visszairányítás a shop oldalra
+            }
+        })
+        .catch(error => console.error("Hiba a kosár törlésekor:", error));
     }
     </script>
 
