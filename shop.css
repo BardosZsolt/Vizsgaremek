@@ -165,3 +165,124 @@ h1 {
     font-size: 1.5em;
     cursor: pointer;
 }
+/* Kosár általános stílus */
+.cart-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #333;
+}
+
+/* Táblázat stílus */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.cart-table th,
+.cart-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.cart-table th {
+    background: #333;
+    color: #fff;
+    font-weight: bold;
+}
+
+.cart-table tr:nth-child(even) {
+    background: #f2f2f2;
+}
+
+/* Kosár gombok */
+.cart-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    margin: 5px;
+    text-decoration: none;
+    background: #333;
+    color: #fff;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #555;
+}
+
+.btn-clear {
+    background: #e74c3c;
+}
+
+.btn-clear:hover {
+    background: #c0392b;
+}
+
+/* Üres kosár - alap stílus */
+.empty-cart {
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    color: #fff;
+    border-radius: 10px;
+    margin: 30px auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.empty-cart h1 {
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.empty-cart p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    color:black;
+}
+
+/* Gomb stílus - "Vissza a boltba" */
+.empty-cart .btn-back {
+    display: inline-block;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    background: #007bff;
+    color: #fff;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
+}
+
+.empty-cart .btn-back:hover {
+    background: #0056b3;
+    box-shadow: 0 6px 8px rgba(0, 86, 179, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Gombok igazítása középre */
+.empty-cart a {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+

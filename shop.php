@@ -59,8 +59,6 @@
         </div>
     </div>
 
-    <!-- Kosár törlése gomb -->
-    <button class="btn-clear" onclick="clearCart()">Kosár törlése</button>
 
     <script>
     let currentPrice = 0;

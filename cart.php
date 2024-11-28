@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="shop.css">
+</head>
+
 <?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -10,47 +19,55 @@ if (!isset($_SESSION['cart'])) {
 
 // Ellenőrizzük, hogy van-e bármilyen termék a kosárban
 if (empty($_SESSION['cart'])) {
+    echo "<div class='empty-cart'>";
     echo "<h1>A kosarad üres!</h1>";
-    echo '<a href="./?p=shop">Vissza a boltba</a>';
+    echo "<p>Úgy tűnik, még nem adtál hozzá semmit a kosaradhoz. Böngéssz tovább a boltban, és válaszd ki kedvenc termékeidet!</p>";
+    echo '<a href="./?p=shop" class="btn btn-back">Vissza a boltba</a>';
+    echo "</div>";
     exit;
 }
+
+
+
+
+
+// Összesített ár inicializálása
+$total = 0;
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
-    <link rel="stylesheet" href="shop.css">
-</head>
 <body>
-    <h1>Your Shopping Cart</h1>
-    <div class="cart-items">
-        <?php
-        $total = 0;
-
-        // Kosár tételek megjelenítése
-        foreach ($_SESSION['cart'] as $index => $item) {
-            $item_total = $item['price'] * $item['quantity'];
-            $total += $item_total;
-
-            echo '<div class="cart-item">';
-            echo '<h4>' . $item['name'] . '</h4>';
-            echo '<p>Size: ' . $item['size'] . '</p>';
-            echo '<p>Quantity: ' . $item['quantity'] . '</p>';
-            echo '<p>Price: £' . $item_total . '</p>';
-            echo '<button onclick="removeItem(' . $index . ')">Törlés</button>';
-            echo '</div>';
-        }
-        ?>
+    <div class="cart-container">
+        <h1>Your Shopping Cart</h1>
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Size</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($_SESSION['cart'] as $item): ?>
+                    <?php 
+                    $itemTotal = $item['price'] * $item['quantity'];
+                    $total += $itemTotal;
+                    ?>
+                    <tr>
+                        <td><?php echo $item['name']; ?></td>
+                        <td><?php echo $item['size']; ?></td>
+                        <td><?php echo $item['quantity']; ?></td>
+                        <td>£<?php echo number_format($item['price'], 2); ?></td>
+                        <td>£<?php echo number_format($itemTotal, 2); ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
         <h2>Total: £<?php echo number_format($total, 2); ?></h2>
-
-        <!-- Kosár törlése gomb -->
-        <button onclick="clearCart()">Kosár Törlése</button>
-
-        <!-- Vásárlás folytatása -->
-        <a href="./?p=shop" class="btn">Continue Shopping</a>
+        <div class="cart-actions">
+            <a onclick="clearCart()" class="btn btn-clear">Kosár Törlése</a>
+            <a href="./?p=shop" class="btn btn-back">Continue Shopping</a>
+        </div>
     </div>
 
     <script>
@@ -70,26 +87,7 @@ if (empty($_SESSION['cart'])) {
                 location.reload(); // Frissítjük az oldalt
             }
         })
-        .catch(error => console.error("Hiba a kosár törlésekor:", error));
-    }
-
-    // Egy termék törlése a kosárból
-    function removeItem(index) {
-        fetch("cart_action.php", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ action: "removeItem", index: index })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === "success") {
-                alert(data.message);
-                location.reload(); // Frissítjük az oldalt
-            }
-        })
-        .catch(error => console.error("Hiba a tétel törlésekor:", error));
+        .catch(error => {console.error("Hiba a kosár törlésekor:", error); location.reload();});
     }
     </script>
 </body>

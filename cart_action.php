@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
 
+        print_r($input);
         // Kosár törlése
         if ($input['action'] === 'clearCart') {
             if (isset($_SESSION['cart'])) {
