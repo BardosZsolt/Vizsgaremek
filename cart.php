@@ -36,7 +36,7 @@ $total = 0;
 ?>
 <body>
     <div class="cart-container">
-        <h1>Your Shopping Cart</h1>
+        <h1 id="orders">Your Shopping Cart</h1>
         <table class="cart-table">
             <thead>
                 <tr>
@@ -67,6 +67,7 @@ $total = 0;
         <div class="cart-actions">
             <a onclick="clearCart()" class="btn btn-clear">Kosár Törlése</a>
             <a href="./?p=shop" class="btn btn-back">Continue Shopping</a>
+            <a href="checkout.php" class="btn btn-purchase">Buying</a>
         </div>
     </div>
 

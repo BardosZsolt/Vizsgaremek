@@ -179,6 +179,10 @@ h1 {
 h1 {
     text-align: center;
     color: white;
+
+}
+#orders{
+    color: #000;
 }
 
 
@@ -286,5 +290,142 @@ h1 {
     display: inline-block;
     margin-top: 20px;
 }
+.checkout-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: Arial, sans-serif;
+}
 
+.checkout-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
 
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    text-decoration: none;
+    background: #333;
+    color: #fff;
+    border-radius: 5px;
+    transition: background 0.3s;
+    text-align: center;
+}
+
+.btn:hover {
+    background: #555;
+}
+/* Szállítási és fizetési adatok kerettel */
+form {
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #e3f2fd; /* Világos kék háttér */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Árnyék */
+    border: 2px solid #000; /* Fekete külső keret */
+}
+
+form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #37474f; /* Sötétszürke szöveg */
+}
+
+form input,
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #000; /* Fekete keret a mezők körül */
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #f1f8e9; /* Világos zöldes árnyalat */
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+form input:focus,
+form select:focus {
+    border-color: #1e88e5; /* Kék fókusz */
+    box-shadow: 0 0 8px rgba(30, 136, 229, 0.5);
+    outline: none;
+    background-color: #ffffff; /* Fókuszban fehér háttér */
+}
+
+form button {
+    width: 100%;
+    padding: 15px;
+    background-color: lightseagreen; 
+    color: #ffffff;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+form button:hover {
+    background-color: lightseagreen; 
+    transform: scale(1.05); /* Enyhe nagyítás */
+}
+
+form button:active {
+    background-color: #ff6f00; /* Sötétebb narancs aktív állapot */
+}
+
+/* Formázott fejléc */
+form h1 {
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #1e88e5; /* Kék cím */
+    font-weight: bold;
+}
+
+/* Keret az egyes mezők között */
+form .form-group {
+    padding: 10px;
+    border: 1px solid #000; /* Fekete keret a mezők között */
+    border-radius: 5px;
+    margin-bottom: 15px;
+    background-color: #ffffff; /* Fehér háttér az egyes szakaszoknak */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    form {
+        padding: 15px;
+    }
+}
