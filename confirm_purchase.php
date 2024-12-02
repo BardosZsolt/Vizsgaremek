@@ -24,6 +24,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Árnyék */
             text-align: center;
+            border: 2px solid #000; /* Fekete keret */
         }
 
         .confirmation h1 {
