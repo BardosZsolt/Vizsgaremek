@@ -60,7 +60,7 @@
     form input:focus {
         outline: none;
         background-color: #383838;
-        box-shadow: 0 0 5px #e91e63;
+        box-shadow: 0 0 5px white;
     }
 
     button {
@@ -79,7 +79,7 @@
     button:hover {
         background-color: white;
         transform: translateY(-3px);
-        box-shadow: 0 5px 10px rgba(233, 30, 99, 0.5);
+        box-shadow: 0 5px 10px rgba(255, 255, 255, 0.5);
     }
 
     button:active {
@@ -100,7 +100,7 @@
     }
 
     p a:hover {
-        color: white;
+        color: #5b81eb;
     }
 
     .back-button {
@@ -120,7 +120,7 @@
     .back-button:hover {
         background-color: white;
         transform: translateY(-3px);
-        box-shadow: 0 5px 10px rgba(233, 30, 99, 0.5);
+        box-shadow: 0 5px 10px rgba(255, 255, 255, 0.5);
     }
 
     .back-button:active {
@@ -131,7 +131,7 @@
 <body>
 
     <div class="container">
-        <h2>Registration</h2>
+        <h2>Sign up</h2>
         <form action="reg_ir.php" method="POST">
             <label for="username">Username</label>
             <input type="text" id="username" name="username" required>
@@ -145,9 +145,9 @@
             <label for="retype_password">Confirm password</label>
             <input type="password" id="retype_password" name="retype_password" required>
 
-            <button type="submit">Registration</button>
+            <button type="submit">Sign up</button>
         </form>
-        <p>Already have an account? <a href="bejelentkezes.php">Log in here</a>.</p>
+        <p>Already have an account? <a href="bejelentkezes.php">Sign in here</a>.</p>
         <a href="index.php" class="back-button">Back to main page</a>
     </div>
 

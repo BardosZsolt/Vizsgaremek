@@ -16,7 +16,6 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     <ul>
         <li><a href="index.php">HOME</a></li>
         <li><a href="./?p=about">ABOUT</a></li>
-        <li><a href="./?p=galery">GALLERY</a></li>
         <li><a href="./?p=shop">SHOP</a></li>
         <li class="user-status">
             <?php
@@ -27,12 +26,12 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
             }
             ?>
             <div class="submenu">
-                <a href="regisztracio.php">Regisztráció</a>
+                <a href="regisztracio.php">Sign up</a>
                 <?php
                 if (!isset($_SESSION["uid"])) {
-                    echo '<a href="bejelentkezes.php">Bejelentkezés</a>';
+                    echo '<a href="bejelentkezes.php">Sign in</a>';
                 } else {
-                    echo '<a href="kijelentkezes.php">Kijelentkezés</a>';
+                    echo '<a href="kijelentkezes.php">Log out</a>';
                 }
                 ?>
             </div>

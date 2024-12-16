@@ -242,7 +242,7 @@ h1 {
 .empty-cart {
     text-align: center;
     padding: 50px 20px;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    background: linear-gradient(135deg, #fefefe, #7fb3eb);
     color: #fff;
     border-radius: 10px;
     margin: 30px auto;
@@ -272,15 +272,15 @@ h1 {
     font-size: 1rem;
     font-weight: bold;
     text-decoration: none;
-    background: #007bff;
+    background: black;
     color: #fff;
     border-radius: 50px;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 4px 6px rgba(204, 41, 41, 0.3);
 }
 
 .empty-cart .btn-back:hover {
-    background: #0056b3;
+    background: #7fb3eb;
     box-shadow: 0 6px 8px rgba(0, 86, 179, 0.5);
     transform: translateY(-2px);
 }
@@ -343,7 +343,7 @@ h1 {
 }
 
 .btn:hover {
-    background: #555;
+    background: #7fb3eb;
 }
 /* Szállítási és fizetési adatok kerettel */
 form {

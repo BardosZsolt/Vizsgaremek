@@ -58,7 +58,7 @@
         form input:focus {
             outline: none;
             background-color: #383838;
-            box-shadow: 0 0 5px #e91e63;
+            box-shadow: 0 0 5px white;
         }
 
         button {
@@ -98,7 +98,7 @@
         }
 
         p a:hover {
-            color: #ff4081;
+            color: #5b81eb;
         }
 
         .back-button {
@@ -130,7 +130,7 @@
 
 <body>
     <div class="container">
-        <h2>Login</h2>
+        <h2>Sign in</h2>
         <form action="bejelentkezes_ir.php" method="POST">
             <label for="email">Email</label>
             <input type="email" id="email" name="email" required>
@@ -138,9 +138,9 @@
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required>
 
-            <button type="submit">Login</button>
+            <button type="submit">Sign in</button>
         </form>
-        <p>Don't have an account yet? <a href="regisztracio.php">Register here</a>.</p>
+        <p>Don't have an account yet? <a href="regisztracio.php">Sign up here</a>.</p>
         <a href="index.php" class="back-button">Back to main page</a>
     </div>
 </body>

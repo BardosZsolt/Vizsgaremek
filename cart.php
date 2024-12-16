@@ -110,7 +110,7 @@ $total = 0;
         </table>
         <h2>Total: £<?php echo number_format($total, 2); ?></h2>
         <div class="cart-actions">
-            <a onclick="clearCart()" class="btn btn-clear">Kosár Törlése</a>
+            <a onclick="clearCart()" class="btn btn-clear">Empty Cart</a>
             <a href="./?p=shop" class="btn btn-back">Continue Shopping</a>
             <a href="checkout.php" class="btn btn-purchase">Buying</a>
         </div>
