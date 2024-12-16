@@ -21,7 +21,7 @@ session_start();
   </style>
   <div class="container">
     <div class="navbar">
-      <img src="images/logo2.png" alt="logo">
+      <img src="images/logohb.png" alt="logo">
       <?php include("navbar.php"); ?>
     </div>
     <?php
@@ -30,9 +30,6 @@ session_start();
 
       // Tartalom betöltése a "p" paraméter alapján
       switch ($p) {
-        case "galery":
-          include("gallery.php");
-          break;
         case "shop":
           include("shop.php");
           break;
