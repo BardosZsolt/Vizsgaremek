@@ -6,7 +6,7 @@ session_start();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trapstar</title>
+  <title>Fashionhub</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
   <link rel="shortcut icon" type="image/jpg" href="images/writing-text.png"/>
   <link rel="stylesheet" href="kezdolap.css">
