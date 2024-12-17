@@ -3,113 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vásárlás megerősítése</title>
+    <title>Vásárlás visszaigazolás</title>
     <style>
+        /* Alap háttér beállítás */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5; /* Világos háttér */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
+            background: url('images/fashionhub_bg.png') no-repeat center center fixed;
+            background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
         }
 
+        /* Fő doboz */
         .confirmation {
-            max-width: 600px;
+            max-width: 700px;
             width: 90%;
-            background-color: #ffffff; /* Fehér doboz */
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Árnyék */
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 40px 30px;
             text-align: center;
-            border: 2px solid #000; /* Fekete keret */
+            animation: fadeIn 1s ease-in-out;
         }
 
+        /* Animáció a beúszáshoz */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Címsor */
         .confirmation h1 {
-            color: #1e88e5; /* Kék cím */
-            margin-bottom: 20px;
-        }
-
-        .confirmation p {
-            font-size: 1.1em;
-            margin-bottom: 20px;
-            color: #37474f; /* Sötétszürke szöveg */
-        }
-
-        .confirmation h2 {
-            color: #fbc02d; /* Arany cím */
+            color: #2c3e50;
+            font-size: 2em;
             margin-bottom: 10px;
         }
 
+        /* Ikon és Köszönet szöveg */
+        .icon {
+            font-size: 4em;
+            color: #27ae60;
+            margin-bottom: 15px;
+        }
+
+        .confirmation p {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        /* Vásárlási adatok */
         .confirmation ul {
             list-style: none;
             padding: 0;
             text-align: left;
+            margin: 0 auto 20px auto;
+            max-width: 500px;
         }
 
         .confirmation ul li {
+            font-size: 1em;
             margin-bottom: 10px;
-            font-size: 1.1em;
-            color: #455a64; /* Sötétebb szürke */
+            color: #444;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 5px;
         }
 
         .confirmation ul li strong {
-            color: #000; /* Fekete kiemelés */
+            font-weight: bold;
+            color: #000;
         }
 
+        /* Gomb */
         .confirmation button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 1.1em;
-            color: #ffffff;
-            background-color: #1e88e5; /* Kék gomb */
+            background-color: #4bbbbd;
+            color: #fff;
             border: none;
+            padding: 12px 20px;
+            font-size: 1.1em;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.2s;
         }
 
         .confirmation button:hover {
-            background-color: #1565c0; /* Sötétebb kék hover */
-            transform: scale(1.05); /* Enyhe nagyítás */
+            background-color: #4bbbbd;
+            transform: scale(1.05);
         }
 
-        .confirmation button:active {
-            background-color: #0d47a1; /* Még sötétebb kék */
+
+        .back-link:hover {
+            color: #1565c0;
         }
     </style>
 </head>
 <body>
     <?php
-    session_start();  // A session indítása
+    session_start();  // Session indítása
 
     // Kosár ürítése vásárlás után
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Kosár kiürítése
-        unset($_SESSION['cart']); // Töröljük a kosár adatokat a session-ból
+        unset($_SESSION['cart']);
 
-        $name = htmlspecialchars($_POST['name']);       // Név
-        $email = htmlspecialchars($_POST['email']);     // E-mail cím
-        $zipcode = htmlspecialchars($_POST['zipcode']); // Irányítószám
-        $city = htmlspecialchars($_POST['city']);       // Város
-        $address = htmlspecialchars($_POST['address']); // Cím
-        $payment = htmlspecialchars($_POST['payment']); // Fizetési mód
+        // Űrlap adatok begyűjtése
+        $name = htmlspecialchars($_POST['name']);
+        $email = htmlspecialchars($_POST['email']);
+        $zipcode = htmlspecialchars($_POST['zipcode']);
+        $city = htmlspecialchars($_POST['city']);
+        $address = htmlspecialchars($_POST['address']);
+        $payment = htmlspecialchars($_POST['payment']);
 
         echo "<div class='confirmation'>";
-        echo "<h1>Vásárlás megerősítve!</h1>";
-        echo "<p>Köszönjük, hogy nálunk vásároltál.</p>";
-        echo "<h2>Adatok:</h2>";
+        echo "<div class='icon'>&#10004;</div>"; // Pipa ikon
+        echo "<h1>Köszönjük a vásárlást!</h1>";
+        echo "<p>A rendelésed adatait sikeresen rögzítettük.</p>";
+
         echo "<ul>";
         echo "<li><strong>Név:</strong> $name</li>";
         echo "<li><strong>E-mail:</strong> $email</li>";
         echo "<li><strong>Irányítószám:</strong> $zipcode</li>";
         echo "<li><strong>Város:</strong> $city</li>";
         echo "<li><strong>Cím:</strong> $address</li>";
-        echo "<li><strong>Fizetési mód:</strong> $payment</li>";
+        echo "<li><strong>Fizetési mód:</strong> " . ($payment == 'card' ? 'Bankkártya' : 'Készpénz') . "</li>";
         echo "</ul>";
-        echo "<button onclick=\"window.location.href='./?p=shop'\">Vissza a boltba</button>";
+
+        echo "<button onclick=\"window.location.href='./?p=shop'\">Vissza a boltba</button>"; 
         echo "</div>";
     } else {
         echo "<div class='confirmation'>";
