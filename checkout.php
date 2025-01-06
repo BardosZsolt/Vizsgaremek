@@ -148,15 +148,15 @@ if (!isset($_SESSION['cart'])) {
 </head>
 <body>
     <div class="checkout-container">
-        <h1>Vásárlás Összegzése</h1>
+        <h1>Purchase Summary</h1>
         <table class="cart-table">
             <thead>
                 <tr>
-                    <th>Termék</th>
-                    <th>Méret</th>
-                    <th>Mennyiség</th>
-                    <th>Ár</th>
-                    <th>Összesen</th>
+                    <th>Product</th>
+                    <th>Size</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>All</th>
                 </tr>
             </thead>
             <tbody>
@@ -176,34 +176,34 @@ if (!isset($_SESSION['cart'])) {
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <h2>Végösszeg: £<?php echo number_format($total, 2); ?></h2>
+        <h2>Final amount: £<?php echo number_format($total, 2); ?></h2>
 
-        <h1>Szállítási és Fizetési Információ</h1>
+        <h1>Shipping and Payment Information</h1>
         <form action="confirm_purchase.php" method="POST">
-            <label for="name">Teljes Név:</label>
+            <label for="name">Full name:</label>
             <input type="text" id="name" name="name" required>
 
-            <label for="email">E-mail cím:</label>
+            <label for="email">E-mail address:</label>
             <input type="email" id="email" name="email" required>
 
-            <label for="zipcode">Irányítószám:</label>
+            <label for="zipcode">Postal code:</label>
             <input type="text" id="zipcode" name="zipcode" oninput="fetchCity()" required>
 
-            <label for="city">Város:</label>
+            <label for="city">City:</label>
             <input type="text" id="city" name="city" required>
 
-            <label for="address">Cím:</label>
+            <label for="address">Address:</label>
             <input type="text" id="address" name="address" required>
 
-            <label for="payment">Fizetési Mód:</label>
+            <label for="payment">Payment Method:</label>
             <select id="payment" name="payment" required>
-                <option value="cash">Készpénz</option>
-                <option value="card">Bankkártya</option>
+                <option value="cash">After delivery payment</option>
+                <option value="card">Card</option>
             </select>
 
-            <button type="submit">Vásárlás megerősítése</button>
+            <button type="submit">Purchase confirmation</button>
         </form>
-        <a href="./?p=shop" class="btn-back">Vissza a boltba</a>
+        <a href="./?p=shop" class="btn-back">Back to the store</a>
     </div>
 </body>
 </html>

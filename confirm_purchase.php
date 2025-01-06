@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vásárlás visszaigazolás</title>
+    <title>Purchase confirmation</title>
     <style>
         /* Alap háttér beállítás */
         body {
@@ -122,19 +122,19 @@
 
         echo "<div class='confirmation'>";
         echo "<div class='icon'>&#10004;</div>"; // Pipa ikon
-        echo "<h1>Köszönjük a vásárlást!</h1>";
-        echo "<p>A rendelésed adatait sikeresen rögzítettük.</p>";
+        echo "<h1>Thank you for your purchase!</h1>";
+        echo "<p>Your order details have been successfully recorded.</p>";
 
         echo "<ul>";
-        echo "<li><strong>Név:</strong> $name</li>";
+        echo "<li><strong>Name:</strong> $name</li>";
         echo "<li><strong>E-mail:</strong> $email</li>";
-        echo "<li><strong>Irányítószám:</strong> $zipcode</li>";
-        echo "<li><strong>Város:</strong> $city</li>";
-        echo "<li><strong>Cím:</strong> $address</li>";
-        echo "<li><strong>Fizetési mód:</strong> " . ($payment == 'card' ? 'Bankkártya' : 'Készpénz') . "</li>";
+        echo "<li><strong>Zipcode:</strong> $zipcode</li>";
+        echo "<li><strong>City:</strong> $city</li>";
+        echo "<li><strong>Address:</strong> $address</li>";
+        echo "<li><strong>Payment method:</strong> " . ($payment == 'card' ? 'Card' : 'After delivery payment') . "</li>";
         echo "</ul>";
 
-        echo "<button onclick=\"window.location.href='./?p=shop'\">Vissza a boltba</button>"; 
+        echo "<button onclick=\"window.location.href='./?p=shop'\">Back to the store</button>"; 
         echo "</div>";
     } else {
         echo "<div class='confirmation'>";
