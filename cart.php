@@ -1,3 +1,10 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,9 +64,6 @@
 </head>
 
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 
 // Kosár inicializálása, ha még nem létezik
 if (!isset($_SESSION['cart'])) {
