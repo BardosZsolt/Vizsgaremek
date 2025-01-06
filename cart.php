@@ -4,7 +4,6 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +11,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="shop.css">
-    <style>
+     <style>
         body {
             margin: 0;
             padding: 0;
@@ -21,17 +20,19 @@ if (session_status() === PHP_SESSION_NONE) {
             background-position: center;
             background-attachment: fixed;
             font-family: Arial, sans-serif;
+            color: #fff; /* Fehér szöveg */
         }
         .cart-container {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(0, 0, 0, 0.8); /* Fekete áttetsző háttér a kosárnak */
             margin: 50px auto;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             max-width: 800px;
         }
         h1, h2 {
             text-align: center;
+            color: #fff; /* Fehér szöveg */
         }
         .cart-table {
             width: 100%;
@@ -40,8 +41,12 @@ if (session_status() === PHP_SESSION_NONE) {
         }
         .cart-table th, .cart-table td {
             padding: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid #555; /* Sötétszürke keret */
             text-align: left;
+            color: #fff; /* Fehér szöveg */
+        }
+        .cart-table th {
+            background: #444; /* Még sötétebb szürke fejlécek */
         }
         .cart-actions {
             display: flex;
@@ -51,14 +56,19 @@ if (session_status() === PHP_SESSION_NONE) {
         .btn {
             display: inline-block;
             padding: 10px 20px;
-            color: #fff;
-            background: #2196f3;
+            color: #000; /* Fekete szöveg alapértelmezett */
+            background: #fff; /* Fehér háttér alapértelmezett */
             text-decoration: none;
             border-radius: 5px;
-            transition: background 0.3s;
+            transition: background 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #fff; /* Fehér keret */
         }
         .btn:hover {
-            background: #1769aa;
+            background: #fff; /* Fehér háttér hover esetén */
+            color: #000; /* Fekete szöveg hover esetén */
+            border: 1px solid #fff; /* Fehér keret hover esetén */
+            transform: scale(1.1); /* Gomb nagyítása hover esetén */
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8); /* Fehér világítás hover esetén */
         }
     </style>
 </head>
