@@ -1,3 +1,10 @@
+<?php
+// Csak akkor indítjuk el a session-t, ha még nincs session
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +23,10 @@
             ["name" => "Trapstar Shooters Tee", "price" => 70.00, "image" => "images/product-6.jpg", "description" => "A bold tee with shooters print, ideal for streetwear enthusiasts."],
             ["name" => "Trapstar Gradient Blue Tee", "price" => 50.00, "image" => "images/product-7.jpg", "description" => "A cool blue gradient tee, blending comfort and style."],
             ["name" => "Trapstar Decoded Tee", "price" => 45.00, "image" => "images/product-8.jpg", "description" => "A decoded design tee with a modern look, made for comfort and style."],
-            // Add more products as needed
+            ["name" => "Trapstar Hoodie", "price" => 90.00, "image" => "images/product-5.jpg", "description" => "A comfortable hoodie perfect for colder days."],
+            ["name" => "Trapstar Jacket", "price" => 150.00, "image" => "images/product-6.jpg", "description" => "A stylish jacket to complement any outfit."],
+            ["name" => "Trapstar Cap", "price" => 30.00, "image" => "images/product-7.jpg", "description" => "A casual cap for everyday use."],
+            ["name" => "Trapstar Sneakers", "price" => 120.00, "image" => "images/product-8.jpg", "description" => "Comfortable and stylish sneakers for any occasion."]
         ];
 
         foreach ($products as $product) {
@@ -59,7 +69,6 @@
         </div>
     </div>
 
-
     <script>
     let currentPrice = 0;
 
@@ -84,60 +93,59 @@
     }
 
     function addToCart() {
-        const name = document.getElementById("modal-name").innerText;
-        const price = parseFloat(document.getElementById("modal-price").innerText.replace("£", ""));
-        const size = document.getElementById("size").value;
-        const quantity = parseInt(document.getElementById("quantity").value);
+    const name = document.getElementById("modal-name").innerText;
+    const price = parseFloat(document.getElementById("modal-price").innerText.replace("£", ""));
+    const size = document.getElementById("size").value;
+    const quantity = parseInt(document.getElementById("quantity").value);
 
-        if (size === "Select Size") {
-            alert("Kérlek, válassz méretet!");
-            return;
+    if (size === "Select Size") {
+        alert("Kérlek, válassz méretet!");
+        return;
+    }
+
+    // Ellenőrizzük, hogy a felhasználó be van-e jelentkezve
+    fetch("cart_action.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `action=addToCart&name=${encodeURIComponent(name)}&price=${encodeURIComponent(price)}&size=${encodeURIComponent(size)}&quantity=${encodeURIComponent(quantity)}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "error") {
+            alert(data.message);
+            if (data.message === "Be kell jelentkezned a vásárláshoz!") {
+                window.location.href = "bejelentkezes.php"; // Ha nem vagy bejelentkezve, átirányítás a bejelentkezéshez
+            }
+        } else {
+            alert(data.message);
+            updateCartCount(); // Kosár frissítése
         }
+    })
+    .catch(error => console.error("Hiba:", error));
+}
 
-        // AJAX hívás a kosár frissítéséhez
+
+
+
+    function updateCartCount() {
+        // Frissítjük a kosárban lévő termékek számát
         fetch("cart_action.php", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/x-www-form-urlencoded"
             },
-            body: JSON.stringify({
-                action: "addToCart",
-                name: name,
-                price: price,
-                size: size,
-                quantity: quantity
-            })
+            body: `action=updateCartCount`
         })
         .then(response => response.json())
         .then(data => {
             if (data.status === "success") {
-                alert(data.message);
-                updateCartCount();
-            } else {
-                alert(data.message);
+                // Például a kosár ikont frissítjük
+                document.getElementById("cart-count").innerText = data.cartCount;
             }
         })
         .catch(error => console.error("Hiba:", error));
-    }
-
-    function clearCart() {
-        fetch("cart_action.php", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                action: "clearCart"
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === "success") {
-                alert(data.message);
-                window.location.href = "shop.php"; // Visszairányítás a shop oldalra
-            }
-        })
-        .catch(error => console.error("Hiba a kosár törlésekor:", error));
     }
     </script>
 

@@ -180,30 +180,54 @@ if (!isset($_SESSION['cart'])) {
 
         <h1>Shipping and Payment Information</h1>
         <form action="confirm_purchase.php" method="POST">
-            <label for="name">Full name:</label>
-            <input type="text" id="name" name="name" required>
+    <label for="name">Full name:</label>
+    <input type="text" id="name" name="name" required>
 
-            <label for="email">E-mail address:</label>
-            <input type="email" id="email" name="email" required>
+    <label for="email">E-mail address:</label>
+    <input type="email" id="email" name="email" required>
 
-            <label for="zipcode">Postal code:</label>
-            <input type="text" id="zipcode" name="zipcode" oninput="fetchCity()" required>
+    <label for="zipcode">Postal code:</label>
+    <input type="text" id="zipcode" name="zipcode" oninput="fetchCity()" required>
 
-            <label for="city">City:</label>
-            <input type="text" id="city" name="city" required>
+    <label for="city">City:</label>
+    <input type="text" id="city" name="city" required>
 
-            <label for="address">Address:</label>
-            <input type="text" id="address" name="address" required>
+    <label for="address">Address:</label>
+    <input type="text" id="address" name="address" required>
 
-            <label for="payment">Payment Method:</label>
-            <select id="payment" name="payment" required>
-                <option value="cash">After delivery payment</option>
-                <option value="card">Card</option>
-            </select>
+    <label for="payment">Payment Method:</label>
+    <select id="payment" name="payment" onchange="toggleCardFields()" required>
+        <option value="cash">After delivery payment</option>
+        <option value="card">Card</option>
+    </select>
 
-            <button type="submit">Purchase confirmation</button>
-        </form>
-        <a href="./?p=shop" class="btn-back">Back to the store</a>
+    <!-- Bankkártyaadatok -->
+    <div id="card-fields" style="display: none;">
+        <label for="card-number">Card Number:</label>
+        <input type="text" id="card-number" name="card_number" pattern="\d{16}" placeholder="1234 5678 9012 3456">
+
+        <label for="expiry-date">Expiry Date:</label>
+        <input type="text" id="expiry-date" name="expiry_date" pattern="\d{2}/\d{2}" placeholder="MM/YY">
+
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" name="cvv" pattern="\d{3}" placeholder="123">
     </div>
+
+    <button type="submit">Purchase confirmation</button>
+</form>
+
+<script>
+    function toggleCardFields() {
+        const paymentMethod = document.getElementById('payment').value;
+        const cardFields = document.getElementById('card-fields');
+
+        if (paymentMethod === 'card') {
+            cardFields.style.display = 'block';
+        } else {
+            cardFields.style.display = 'none';
+        }
+    }
+</script>
+
 </body>
 </html>
