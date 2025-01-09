@@ -23,6 +23,7 @@ session_start();
     <div class="navbar">
       <img src="images/logohb.png" alt="logo">
       <?php include("navbar.php"); ?>
+      
     </div>
     <?php
       // Az oldal kiválasztása az URL-ből
@@ -39,6 +40,8 @@ session_start();
         default:
           include("kezdolap.php"); // Alapértelmezett kezdőlap
           break;
+
+          
       }
     ?>
   </div>

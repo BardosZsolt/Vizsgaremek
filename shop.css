@@ -2,15 +2,18 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    
 }
 
 body {
     font-family: Arial, sans-serif;
+    background: none;
 }
 
 .container {
     margin: auto;
     text-align: center;
+    background: none;
 }
 
 h1 {
@@ -27,14 +30,18 @@ h1 {
     padding: 10px;
     border: 1px solid #ddd;
     text-align: center;
-    background: #fff;
+    background: none; /* Eltüntetjük a háttérszínt */
     transition: box-shadow 0.3s;
+    backdrop-filter: blur(2px);
+    border-radius: 25px;
+  border: 2px solid aliceblue; /* Világos szegély */
 }
 
 .product img {
     width: 100%;
     height: auto;
     cursor: pointer;
+    background-color: transparent; /* Fehér háttér eltüntetése */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition hozzáadása */
 }
 
@@ -46,12 +53,12 @@ h1 {
 .product h4 {
     margin: 10px 0;
     font-size: 1.2em; /* Növeltem a betűméretet */
-    color: #000; /* Fekete szín a termék nevéhez */
+    color: white; /* Fekete szín a termék nevéhez */
     font-weight: bold; /* Kiemelés vastag betűvel */
 }
 
 .product p {
-    color: #000; /* Fekete szín az árhoz */
+    color: white; /* Fekete szín az árhoz */
     font-size: 1.1em; /* Növeltem az ár betűméretét */
     font-weight: bold; /* Kiemelés vastag betűvel */
     margin-top: 5px;

@@ -93,7 +93,7 @@
     </div>
     <div class="row">
         <div class="col-4">
-          <img src="images/product-5.jpg" alt="">
+          <img src="images/product-5-.jpg" alt="">
           <h4>Trapstar Irongate Paisley Tee</h4>
           <div class="rating">
             <ion-icon name="star"></ion-icon>
