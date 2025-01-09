@@ -14,6 +14,14 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
 
 <nav>
     <ul>
+        <!-- Logó bal oldalon -->
+        <li class="logo">
+            <a href="index.php">
+                <img src="images/fashionhb.png" alt="Logo" style="height: 25px;"> <!-- A logó képe -->
+            </a>
+        </li>
+        
+        <!-- Menüpontok jobb oldalon -->
         <li><a href="index.php">HOME</a></li>
         <li><a href="./?p=about">ABOUT</a></li>
         <li><a href="./?p=shop">SHOP</a></li>
@@ -36,15 +44,14 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 ?>
             </div>
         </li>
-        <!-- Kosár ikon -->
         <li class="cart-icon">
             <a href="cart.php">
                 <ion-icon name="cart-sharp"></ion-icon>
                 <span id="cart-count" class="cart-count"><?php echo $cartCount; ?></span>
             </a>
-            <div class="submenu">
+<!--             <div class="submenu">
                 <a href="#" onclick="clearCart()">Kosár törlése</a>
-            </div>
+            </div> -->
         </li>
     </ul>
 </nav>
@@ -89,16 +96,23 @@ updateCartCount();
 </script>
 
 <style>
-    /* A navigációs sáv stílusa */
+ /* A navigációs sáv stílusa */
 nav {
     background-color: black; /* Fekete háttér */
     color: white; /* Fehér szöveg */
     padding: 10px 0;
+    width: 100%; /* Teljes szélesség */
+    position: fixed; /* Rögzített navigáció */
+    top: 0; /* A tetején kezdődjön */
+    left: 0; /* Bal oldalon kezdődjön */
+    z-index: 1000; /* Előrébb hozza a navigációs sávot */
 }
 
+/* A navigációs sáv belső elemeinek elrendezése */
 nav ul {
     display: flex;
-    justify-content: space-around; /* Az elemek közötti térköz */
+    justify-content: space-between; /* Bal oldalon a logó, jobb oldalon a menüpontok */
+    align-items: center; /* Vertikális középre igazítás */
     list-style-type: none; /* Listajelölők eltávolítása */
     margin: 0;
     padding: 0;
@@ -108,6 +122,12 @@ nav li {
     padding: 0 15px; /* Különböző elemek közötti távolság */
 }
 
+/* A logó elhelyezése bal oldalon */
+nav .logo {
+    flex: 1; /* Logó elfoglalja az elérhető helyet */
+    text-align: left; /* A logót balra igazítjuk */
+}
+
 nav a {
     color: white; /* Fehér színű linkek */
     text-decoration: none; /* Link aláhúzásának eltüntetése */
@@ -115,9 +135,10 @@ nav a {
     padding: 10px;
 }
 
+/* Eltávolítjuk a hover effektust */
 nav a:hover {
-    background-color: #333; /* Sötétebb háttér a linkek hover állapotában */
-    border-radius: 5px; /* Lekerekített sarkok */
+    background-color: transparent; /* Semmilyen háttérszín nem változik */
+    border-radius: 0; /* Nincs lekerekítés */
 }
 
 /* Kosár ikon színezése */
@@ -165,5 +186,6 @@ nav li:hover .submenu {
 .submenu a:hover {
     background-color: #333;
 }
+
 
 </style>

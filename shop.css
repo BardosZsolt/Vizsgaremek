@@ -34,7 +34,7 @@ h1 {
     transition: box-shadow 0.3s;
     backdrop-filter: blur(2px);
     border-radius: 25px;
-  border: 2px solid aliceblue; /* Világos szegély */
+  border: 2px solid black; /* Világos szegély */
 }
 
 .product img {
@@ -53,12 +53,12 @@ h1 {
 .product h4 {
     margin: 10px 0;
     font-size: 1.2em; /* Növeltem a betűméretet */
-    color: white; /* Fekete szín a termék nevéhez */
+    color: black; /* Fekete szín a termék nevéhez */
     font-weight: bold; /* Kiemelés vastag betűvel */
 }
 
 .product p {
-    color: white; /* Fekete szín az árhoz */
+    color: black; /* Fekete szín az árhoz */
     font-size: 1.1em; /* Növeltem az ár betűméretét */
     font-weight: bold; /* Kiemelés vastag betűvel */
     margin-top: 5px;
@@ -185,7 +185,7 @@ h1 {
 
 h1 {
     text-align: center;
-    color: white;
+    color: black;
 
 }
 #orders{
