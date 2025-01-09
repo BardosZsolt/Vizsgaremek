@@ -1,10 +1,3 @@
-<?php
-// Csak akkor indítjuk el a session-t, ha még nincs session
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -93,59 +86,60 @@ if (session_status() == PHP_SESSION_NONE) {
     }
 
     function addToCart() {
-    const name = document.getElementById("modal-name").innerText;
-    const price = parseFloat(document.getElementById("modal-price").innerText.replace("£", ""));
-    const size = document.getElementById("size").value;
-    const quantity = parseInt(document.getElementById("quantity").value);
+        const name = document.getElementById("modal-name").innerText;
+        const price = parseFloat(document.getElementById("modal-price").innerText.replace("£", ""));
+        const size = document.getElementById("size").value;
+        const quantity = parseInt(document.getElementById("quantity").value);
 
-    if (size === "Select Size") {
-        alert("Kérlek, válassz méretet!");
-        return;
-    }
-
-    // Ellenőrizzük, hogy a felhasználó be van-e jelentkezve
-    fetch("cart_action.php", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: `action=addToCart&name=${encodeURIComponent(name)}&price=${encodeURIComponent(price)}&size=${encodeURIComponent(size)}&quantity=${encodeURIComponent(quantity)}`
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === "error") {
-            alert(data.message);
-            if (data.message === "Be kell jelentkezned a vásárláshoz!") {
-                window.location.href = "bejelentkezes.php"; // Ha nem vagy bejelentkezve, átirányítás a bejelentkezéshez
-            }
-        } else {
-            alert(data.message);
-            updateCartCount(); // Kosár frissítése
+        if (size === "Select Size") {
+            alert("Kérlek, válassz méretet!");
+            return;
         }
-    })
-    .catch(error => console.error("Hiba:", error));
-}
 
-
-
-
-    function updateCartCount() {
-        // Frissítjük a kosárban lévő termékek számát
+        // AJAX hívás a kosár frissítéséhez
         fetch("cart_action.php", {
             method: "POST",
             headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
+                "Content-Type": "application/json"
             },
-            body: `action=updateCartCount`
+            body: JSON.stringify({
+                action: "addToCart",
+                name: name,
+                price: price,
+                size: size,
+                quantity: quantity
+            })
         })
         .then(response => response.json())
         .then(data => {
             if (data.status === "success") {
-                // Például a kosár ikont frissítjük
-                document.getElementById("cart-count").innerText = data.cartCount;
+                alert(data.message);
+                updateCartCount();
+            } else {
+                alert(data.message);
             }
         })
         .catch(error => console.error("Hiba:", error));
+    }
+
+    function clearCart() {
+        fetch("cart_action.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                action: "clearCart"
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                alert(data.message);
+                window.location.href = "shop.php"; // Visszairányítás a shop oldalra
+            }
+        })
+        .catch(error => console.error("Hiba a kosár törlésekor:", error));
     }
     </script>
 
