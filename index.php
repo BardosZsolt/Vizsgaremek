@@ -22,7 +22,7 @@ session_start();
   <div class="container">
     <div class="navbar">
       <?php include("navbar.php"); ?>
-      <?php include("footer.php") ?>
+      <?php include("footer.php") ?>  
     </div>
     <?php
       // Az oldal kiválasztása az URL-ből

@@ -1,346 +1,71 @@
-*{
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
-}
-.container{
-    width: 100%;
-    height: 100vh;
-    background: none;
-    background-size: cover;
-    padding-left: 8%;
-    padding-right: 8%;
-    box-sizing: border-box;
-}
-
-p {
-    color: black;
-}
-
-.menu-icon{
-    width: 30px;
-    cursor: pointer;
-    margin-left: 40px;
-}
-nav{
-    flex: 1;
-    text-align: right;
-}
-nav ul li{
-    list-style: none;
-    display: inline-block;
-    margin-left: 60px;
-}
-nav ul li a{
-    text-decoration: none;
-    color: #fff;
-    font-size: 13px;
-}
-.row{
-    display: flex;
-    height: 88%;
-    align-items: center;
-}
-
-.col{
-    flex-basis: 50%;
-}
-
-.btn{
-    display: inline-block;
-    background: #2c2b2b;
-    color: #fff;
-    padding: 8px 30px;
-    margin: 30px 0;
-    border-radius: 30px;
-    transition: 0.5s;
-    text-decoration: none;
-
-}
-
-.categories{
-    margin: 70px 0;
-}
-
-.col-3{
-    flex-basis: 30%;
-    min-width: 250px;
-    margin-bottom: 30px;
-    padding-left: 25px;
-    padding-right: 25px;
-}
-
-.col-3 img{
-    width: 100%;
-    margin-top: 0;
-    vertical-align: middle;
-    height: auto;
-}
-
-.small-container{
-    max-width: 1080px;
-    margin: auto;
-    padding-left: 25px;
-    padding-right: 25px;
-}
-.col-4{
-    flex-basis: 25%;
-    padding: 10px;
-    min-width: 200px;
-    margin-bottom: 50px;
- 
-}
-
-.col-4 img{
-    width: 100%;
-}
-
-.title{
-    text-align: center;
-    margin: 0 auto 80px;
-    position: relative;
-    line-height: 60px;
-    color: #555;
-}
-
-.title::after{
-    content: '';
-    background: #2c2b2b;
-    width: 80px;
-    height: 5px;
-    border-radius: 5px;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-h4{
-    color: #555;
-}
-
-.col-4 p{
-    font-size: 14px;
-}
-
-small{
-    color:#555;
-}
-
-.testimonial{
-    padding-top: 100px;
-}
-.testimonial .col-3{
-    text-align: center;
-    padding: 40px 20px;
-    box-shadow: 0 0 20px 0px rgba(0,0,0,0.1);
-    cursor: pointer;
-    transition: transform 0.5s;
-}
-
-.testimonial .col-3 img{
-    width: 50px;
-    margin-top: 20px;
-    border-radius: 70%;
-}
-
-.testimonial .col-3:hover{
-    transform: translateY(-10px);
-}
-
-.fa.fa-quote-left{
-    font-size: 34px;
-    color: #ff523b;
-}
-
-.col-3 p{
-    font-size: 12px;
-    margin: 12px 0;
-    color: #777;
-}
-
-.testimonial .col-3 h3{
-    font-weight: 600;
-    color: #555;
-
-}
-
-/*-------------brands-----------*/
-.brands{
-    margin: 100px auto;
-}
-
-.col-5{
-    width: 160px;
-    padding: 50px;
-}
-
-.col-5 img{
-    width: 100%;
-    cursor: pointer;
-    filter: grayscale(100%);
     
 }
 
-.col-5 img:hover{
-    filter: grayscale(0)
+body {
+    font-family: Arial, sans-serif;
+    background: none;
 }
 
-
-
-
-/*---------------all products page --------*/
-
-.row-2{
-    justify-content: space-between;
-    margin: 100px auto 50px;
-}
-select{
-    border: 1px solid #000000;
-    padding: 5px;
-}
-
-select:focus{
-    outline: none;
-}
-
-.page-btn{
-    margin: 0 auto 80px;
-
-}
-
-.page-btn span{
-    display: inline-block;
-    border: 1px solid #000000;
-    margin-left: 10px;
-    width: 40px;
-    height: 40px;
+.container {
+    margin: auto;
     text-align: center;
-    line-height: 40px;
-    cursor: pointer;
+    background: none;
 }
 
-.page-btn span:hover{
-    background: #000000;
-    color: white
-}
-
-
-
-/*---------------single product details-----*/
-
-.single-product{
-    margin-top: 80px;
-}
-
-.single-product .col-2 img{
-    padding: 0;
-
-}
-
-.single-product .col-2{
-    padding: 20px;
-}
-
-.single-product h4{
+h1 {
     margin: 20px 0;
-    font-size: 22px;
-    font-weight: bold;
 }
 
-.single-product select{
-    display: block;
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.product {
     padding: 10px;
-    margin-top: 20px;
+    border: 1px solid #ddd;
+    text-align: center;
+    background: none; /* Eltüntetjük a háttérszínt */
+    transition: box-shadow 0.3s;
+    backdrop-filter: blur(2px);
+    border-radius: 25px;
+  border: 2px solid black; /* Világos szegély */
 }
 
-.single-product input{
-    width: 50px;
-    height: 40px;
-    padding-left: 10px ;
-    font-size: 20px;
-    margin-right: 10px;
-    border: 1px solid #000;
-}
-input:focus{
-    outline: none;
-}
-
-.single-product .fa{
-    margin-left: 10px;
-    margin-top: 10px;
-}
-
-.small-img-row{
-    display: flex;
-    justify-content: space-between;
-}
-
-.small-img-col{
-    flex-basis: 24%;
+.product img {
+    width: 100%;
+    height: auto;
     cursor: pointer;
+    background-color: transparent; /* Fehér háttér eltüntetése */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition hozzáadása */
 }
 
-
-/*---------------cart items --------*/
-
-.cart-page{
-    margin:80px auto;
-}
-table{
-    width: 100%;
-    border-collapse: collapse;
-}
-.cart-info{
-    display: flex;
-    flex-wrap: wrap;
+.product img:hover {
+    transform: scale(1.1) translateY(-5px); /* Nagyítás és felfelé mozgás */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Árnyék hozzáadása */
 }
 
-th{
-    text-align: left;
-    padding: 5px;
-    color: #fff;
-    background-color: #000;
-    font-weight: normal;
+.product h4 {
+    margin: 10px 0;
+    font-size: 1.2em; /* Növeltem a betűméretet */
+    color: black; /* Fekete szín a termék nevéhez */
+    font-weight: bold; /* Kiemelés vastag betűvel */
 }
 
-td{
-    padding: 10px 5px;
-}
-td input{
-    width: 40px;
-    height: 30px;
-    padding: 5px;
+.product p {
+    color: black; /* Fekete szín az árhoz */
+    font-size: 1.1em; /* Növeltem az ár betűméretét */
+    font-weight: bold; /* Kiemelés vastag betűvel */
+    margin-top: 5px;
 }
 
-td a{
-    color:#000;
-    font-size: 12px;
-}
-
-td img{
-    width: 80px;
-    height: 80px;
-    margin-right: 10px;
-}
-
-.total-price{
-    display: flex;
-    justify-content: flex-end;
-}
-
-.total-price table{
-    border-top: 3px solid #000;
-    width: 100%;
-    max-width: 400px;
-}
-
-td:last-child{
-    text-align: right;
-}
-
-th:last-child{
-    text-align: right;
+.product:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Modal styles */
@@ -438,6 +163,86 @@ th:last-child{
     font-size: 1em;
     color: #555;
     font-weight: normal;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+/* Kosár általános stílus */
+.cart-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    color: black;
+
+}
+#orders{
+    color: white;
+}
+
+
+/* Táblázat stílus */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.cart-table th,
+.cart-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.cart-table th {
+    background: #333;
+    color: #fff;
+    font-weight: bold;
+}
+
+.cart-table tr:nth-child(even) {
+    background: #f2f2f2;
+}
+
+/* Kosár gombok */
+.cart-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    margin: 5px;
+    text-decoration: none;
+    background: #333;
+    color: #fff;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #555;
+}
+
+.btn-clear {
+    background: #e74c3c;
+}
+
+.btn-clear:hover {
+    background: #c0392b;
 }
 
 /* Üres kosár - alap stílus */
@@ -631,3 +436,4 @@ form .form-group {
         padding: 15px;
     }
 }
+
