@@ -36,6 +36,9 @@ session_start();
         case "about":
           include("about.php");
           break;
+          case "admin":
+            include("admin.php");
+            break;
         default:
           include("kezdolap.php"); // Alapértelmezett kezdőlap
           break;

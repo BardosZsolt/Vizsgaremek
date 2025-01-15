@@ -18,31 +18,6 @@
 
 <body>
 
-<div class="product-grid">
-    <?php
-    /* $products = [
-        ["name" => "Trapstar Irongate Paisley Tee", "price" => 80.00, "image" => "images/product-5-.png", "description" => "A stylish tee with intricate paisley design, perfect for any casual occasion."],
-        ["name" => "Trapstar Shooters Tee", "price" => 70.00, "image" => "images/product-5-.png", "description" => "A bold tee with shooters print, ideal for streetwear enthusiasts."],
-        ["name" => "Trapstar Gradient Blue Tee", "price" => 50.00, "image" => "images/product-5-.png", "description" => "A cool blue gradient tee, blending comfort and style."],
-        ["name" => "Trapstar Decoded Tee", "price" => 45.00, "image" => "images/product-5-.png", "description" => "A decoded design tee with a modern look, made for comfort and style."],
-        ["name" => "Trapstar Hoodie", "price" => 90.00, "image" => "images/product-5-.png", "description" => "A comfortable hoodie perfect for colder days."],
-        ["name" => "Trapstar Jacket", "price" => 150.00, "image" => "images/product-5-.png", "description" => "A stylish jacket to complement any outfit."],
-        ["name" => "Trapstar Cap", "price" => 30.00, "image" => "images/product-5-.png", "description" => "A casual cap for everyday use."],
-        ["name" => "Trapstar Sneakers", "price" => 120.00, "image" => "images/product-5-.png", "description" => "Comfortable and stylish sneakers for any occasion."]
-    ];
-
-    foreach ($products as $product) {
-        echo '<div class="product">';
-        echo '<img src="' . $product["image"] . '" alt="' . $product["name"] . '" onclick="openModal(\'' . $product["image"] . '\', \'' . $product["name"] . '\', ' . $product["price"] . ', \'' . $product["description"] . '\')">';
-        echo '<h4>' . $product["name"] . '</h4>';
-        echo '<p>£' . $product["price"] . '</p>';
-        echo '</div>';
-    } */
-    ?>
-</div>
-
-
-
 <!-- Modal for enlarged product view -->
 <div id="modal" class="modal">
     <div class="modal-content">
@@ -116,30 +91,61 @@
 
 <h2 class="title">Latest Products</h2>
 <div class="row">
+    <!-- Statikus termékek -->
     <div class="col-4">
         <img src="images/product-9.jpg" alt="" onclick="openModal('images/product-9.jpg', 'Trapstar Irongate Short Black', 120.00, 'Comfortable and stylish shorts for any occasion.')">
         <h4>Trapstar Irongate Short 'Black'</h4>
-     
         <p>£120.00</p>
     </div>
     <div class="col-4">
         <img src="images/product-10.jpg" alt="" onclick="openModal('images/product-10.jpg', 'Trapstar Irongate Short Gray', 120.00, 'Comfortable and stylish shorts in gray.')">
         <h4>Trapstar Irongate Short 'Gray'</h4>
-      
         <p>£120.00</p>
     </div>
     <div class="col-4">
         <img src="images/product-11.jpg" alt="" onclick="openModal('images/product-11.jpg', 'Trapstar Irongate Short', 150.00, 'Stylish shorts for summer days.')">
         <h4>Trapstar Irongate Short</h4>
-       
         <p>£150.00</p>
     </div>
     <div class="col-4">
         <img src="images/product-12.jpg" alt="" onclick="openModal('images/product-12.jpg', 'Trapstar Script Tee', 115.00, 'A stylish tee with a script design.')">
         <h4>Trapstar 'Script' Tee</h4>
-        
         <p>£115.00</p>
     </div>
+
+    <!-- Dinamikus termékek (adatbázisból betöltve) -->
+    <?php
+    // Adatbázis kapcsolat
+    $host = '127.0.0.1';
+    $user = 'root';
+    $password = '';
+    $dbname = 'fashionhub';
+
+    $conn = new mysqli($host, $user, $password, $dbname);
+
+    // Kapcsolat ellenőrzése
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Termékek lekérdezése
+    $sql = "SELECT pname, price, pimage_url, pdescription FROM products";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo '<div class="col-4">';
+            echo '<img src="' . htmlspecialchars($row['pimage_url']) . '" alt="' . htmlspecialchars($row['pname']) . '" onclick="openModal(\'' . addslashes($row['pimage_url']) . '\', \'' . addslashes($row['pname']) . '\', ' . $row['price'] . ', \'' . addslashes($row['pdescription']) . '\')">';
+            echo '<h4>' . htmlspecialchars($row['pname']) . '</h4>';
+            echo '<p>£' . number_format($row['price'], 2) . '</p>';
+            echo '</div>';
+        }
+    } else {
+        echo "<p>No additional products found in the database.</p>";
+    }
+
+    $conn->close();
+    ?>
 </div>
 
 <div class="page-btn">
@@ -215,6 +221,7 @@
     }
 
 
+    
 </script>
 
 </body>

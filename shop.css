@@ -631,3 +631,85 @@ form .form-group {
         padding: 15px;
     }
 }
+
+.page-btn span.active {
+    background-color: #333;
+    color: #fff;
+    border-radius: 50%;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Távolság az elemek között */
+  }
+  
+  .col-4 {
+    flex: 1 1 calc(25% - 20px); /* Egy elem szélessége a sor 25%-a */
+    box-sizing: border-box; /* Hogy a padding és a margin ne növelje az elem méretét */
+    max-width: calc(25% - 20px);
+  }
+  
+  .col-4 img {
+    width: 100%; /* Képek szépen illeszkednek a szülő konténer szélességéhez */
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Távolság az elemek között */
+    margin-bottom: 40px; /* Távolság az utána lévő elemekkel */
+  }
+  
+  .col-4 {
+    flex: 1 1 calc(25% - 20px); /* Egy elem szélessége a sor 25%-a */
+    box-sizing: border-box; /* Hogy a padding és a margin ne növelje az elem méretét */
+    max-width: calc(25% - 20px);
+  }
+  
+  .col-4 img {
+    width: 100%; /* Képek szépen illeszkednek a szülő konténer szélességéhez */
+  }
+  
+  /* Gombok vagy más elemek elhelyezkedéséhez */
+  .page-btn {
+    text-align: center;
+    margin-top: 20px;
+    clear: both; /* Biztosítja, hogy a gombok ne lógjanak be a rácsba */
+  }
+
+  /* A termékek sorba rendezése */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  
+  /* Minden egyes termékhez tartozó oszlop */
+  .col-4 {
+    flex: 1 1 calc(25% - 20px);
+    box-sizing: border-box;
+    max-width: calc(25% - 20px);
+    text-align: center; /* Középre igazítja a szövegeket */
+  }
+  
+  /* A képek fix méretének beállítása */
+  .col-4 img {
+    width: 100%; /* A kép szélessége mindig kitölti a szülő konténer szélességét */
+    height: 200px; /* Fix magasság beállítása */
+    object-fit: cover; /* A képek nem torzulnak, de kitöltik a rendelkezésre álló teret */
+    margin-bottom: 10px; /* Kis távolság a kép és a szöveg között */
+  }
+  
+  /* A termékek nevei és árai */
+  .col-4 h4 {
+    font-size: 16px; /* A termék neve */
+    margin: 10px 0; /* A név és ár közötti távolság */
+  }
+  
+  .col-4 p {
+    font-size: 14px; /* A termék árának mérete */
+    color: #555; /* Sötétebb szín a szövegekhez */
+    margin: 0;
+  }
