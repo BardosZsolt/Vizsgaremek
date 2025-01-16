@@ -1,14 +1,8 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "fashionhub";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Kapcsolódási hiba: " . $conn->connect_error);
+include "kapcsolat.php";
+if ($db->dbect_error) {
+    die("Kapcsolódási hiba: " . $db->dbect_error);
 }
 
 // Termék hozzáadása
@@ -21,10 +15,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $sql = "INSERT INTO products (pname, pdescription, price, pimage_url, pstock, pcategory_id, pcreated_at, pupdated_at) 
             VALUES ('$pname', '$pdescription', '$price', '$pimage_url', 0, 1, NOW(), NOW())";
 
-    if ($conn->query($sql) === TRUE) {
+    if ($db->query($sql) === TRUE) {
         echo "<script>alert('Új termék sikeresen hozzáadva!');</script>";
     } else {
-        echo "<script>alert('Hiba: " . $sql . " - " . $conn->error . "');</script>";
+        echo "<script>alert('Hiba: " . $sql . " - " . $db->error . "');</script>";
     }
 }
 
@@ -95,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <?php
             // Termékek listázása
             $sql = "SELECT pname, price, pimage_url FROM products";
-            $result = $conn->query($sql);
+            $result = $db->query($sql);
 
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
