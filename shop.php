@@ -115,22 +115,18 @@
 
     <!-- Dinamikus termékek (adatbázisból betöltve) -->
     <?php
-    // Adatbázis kapcsolat
-    $host = '127.0.0.1';
-    $user = 'root';
-    $password = '';
-    $dbname = 'fashionhub';
+    include "kapcsolat.php";
 
-    $conn = new mysqli($host, $user, $password, $dbname);
+
 
     // Kapcsolat ellenőrzése
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+    if ($db->connect_error) {
+        die("Connection failed: " . $db->connect_error);
     }
 
     // Termékek lekérdezése
     $sql = "SELECT pname, price, pimage_url, pdescription FROM products";
-    $result = $conn->query($sql);
+    $result = $db->query($sql);
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
@@ -144,7 +140,7 @@
         echo "<p>No additional products found in the database.</p>";
     }
 
-    $conn->close();
+    $db->close();
     ?>
 </div>
 
