@@ -102,6 +102,21 @@ function clearCart() {
 
 // Automatikus frissítéshez hívjuk meg az updateCartCount függvényt
 updateCartCount();
+
+
+// Késleltetés az almenü elrejtéséhez
+let submenuTimeout;
+
+document.querySelector(".user-status").addEventListener("mouseenter", () => {
+    clearTimeout(submenuTimeout); // Töröljük az előző időzítőt
+    document.querySelector(".submenu").style.display = "block"; // Menü megjelenítése
+});
+
+document.querySelector(".user-status").addEventListener("mouseleave", () => {
+    submenuTimeout = setTimeout(() => {
+        document.querySelector(".submenu").style.display = "none"; // Menü elrejtése
+    }, 300); // 300ms késleltetés
+});
 </script>
 
 <style>
@@ -174,13 +189,14 @@ nav a:hover {
 
 /* Submenü stílus */
 .submenu {
-    display: none; /* Alapértelmezetten elrejtjük a legördülő menüt */
+    display: none; /* Elrejtett állapot */
     background-color: black;
     position: absolute;
     top: 40px;
     right: 0;
     padding: 10px;
     border-radius: 5px;
+    z-index: 100; /* Menü a navigációs sáv felett */
 }
 
 nav li:hover .submenu {
