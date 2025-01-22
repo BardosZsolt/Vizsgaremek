@@ -86,6 +86,35 @@
           
             <p>£45.00</p>
         </div>
+        <!-- Dinamikus termékek (adatbázisból betöltve) -->
+        <?php
+        include "kapcsolat.php";
+
+
+
+        // Kapcsolat ellenőrzése
+        if ($db->connect_error) {
+            die("Connection failed: " . $db->connect_error);
+        }
+
+        // Termékek lekérdezése
+        $sql = "SELECT pname, price, pimage_url, pdescription FROM products WHERE pcategory_id = 1";
+        $result = $db->query($sql);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo '<div class="col-4">';
+                echo '<img src="' . htmlspecialchars($row['pimage_url']) . '" alt="' . htmlspecialchars($row['pname']) . '" onclick="openModal(\'' . addslashes($row['pimage_url']) . '\', \'' . addslashes($row['pname']) . '\', ' . $row['price'] . ', \'' . addslashes($row['pdescription']) . '\')">';
+                echo '<h4>' . htmlspecialchars($row['pname']) . '</h4>';
+                echo '<p>£' . number_format($row['price'], 2) . '</p>';
+                echo '</div>';
+            }
+        } else {
+            echo "<p>No additional products found in the database.</p>";
+        }
+
+        $db->close();
+        ?>
     </div>
 </div>
 
@@ -125,7 +154,7 @@
     }
 
     // Termékek lekérdezése
-    $sql = "SELECT pname, price, pimage_url, pdescription FROM products";
+    $sql = "SELECT pname, price, pimage_url, pdescription FROM products WHERE pcategory_id = 2";
     $result = $db->query($sql);
 
     if ($result->num_rows > 0) {

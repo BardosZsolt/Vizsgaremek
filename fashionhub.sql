@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Jan 22. 12:35
+-- Létrehozás ideje: 2025. Jan 22. 14:43
 -- Kiszolgáló verziója: 10.4.6-MariaDB
 -- PHP verzió: 7.3.8
 
@@ -149,7 +149,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`pid`, `pname`, `pdescription`, `price`, `pstock`, `pimage_url`, `pcategory_id`, `pcreated_at`, `pupdated_at`) VALUES
-(2, '1', 'vegyÃ©l meg', '9.99', 1111, 'https://i.imgflip.com/77os8k.png', 1, '2025-01-20 14:09:18', '2025-01-20 14:09:18');
+(2, 'shrek', 'ubi', '111.00', 2, 'https://offmedia.hu/wp-content/uploads/2023/04/shrek4_disneyscreencaps.com_675.0.jpg', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(5, 'tibi csoki', 'tejes', '1000.00', 2, 'https://evedd.hu/img/74418/4823077639890/4823077639890.webp', 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -262,7 +263,7 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT a táblához `products`
 --
 ALTER TABLE `products`
-  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT a táblához `user`
