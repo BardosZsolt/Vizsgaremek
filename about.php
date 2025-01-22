@@ -1,29 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About</title>
-    <link rel="stylesheet" href="about.css" />
-    <link rel="shortcut icon" type="image/jpg" href="images/writing-text.png"/>
-  </head>
-  <body>
-    <div class="keret">
-    <a href="https://fontmeme.com/fonts/biko-font/"><img src="https://fontmeme.com/permalink/250106/09df8b763adeecc6a59efa8b33b021ca.png" alt="biko-font" border="0"></a>    </div>
-    
-    <div class="flex-container">
-      <div>
-        <h2>Fashionhub</h2>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        @keyframes sticky-parallax-header-move-and-size {
+            from {
+                background-position: center top;
+                background-size: cover;
+                height: 100vh;
+                font-size: calc(4vw + 1em);
+            }
+            to {
+                background-position: center bottom;
+                background-size: cover;
+                height: 10vh;
+                font-size: 2em;
+            }
+        }
+
+        #sticky-parallax-header {
+            position: fixed;
+            top: 50px;
+            left: 0;
+            width: 100%; /* Teljes szélesség */
+            height: 100vh; /* Kezdeti magasság */
+            text-align: center;
+            color: white;
+            background: url('images/aboutuss.jpg') no-repeat center top / cover; /* Fontos a `cover` használata */
+            font-size: calc(4vw + 1em);
+            z-index: 999;
+            animation: sticky-parallax-header-move-and-size linear forwards;
+            animation-timeline: scroll();
+            animation-range: 0vh 90vh;
+        }
+
+        body {
+            padding-top: 100vh; /* A fejléc magasságának megfelelő tartalom-eltolás */
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .content h1 {
+            font-size: 2.5em;
+            color: black;
+        }
+
+        .content p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: black;
+        }
+
+        .h2 {
+          font-size: 1.2em;
+        }
+
+        /* Betűtípus */
+        
+        
+    </style>
+</head>
+<body>
+    <header id="sticky-parallax-header">
+        <h2 class="highlighted-text-shadow">About us</h2>
+    </header>
+    <div class="content">
+        <h1>Welcome to Our Company</h1>
         <p>
-          A Fashionhub egy londoni székhelyű divatmárka, amely a streetwear és a hip-hop kultúra hatását ötvözi stílusos és feltűnő ruházatban. A márka jellegzetes stílusát az urbánus motívumok, mint például a városi tájképek, az utcai művészetek és a hip-hop ikonográfiája határozza meg. A Fashionhub ruházat gyakran magában foglalja az egyedi tervezéseket, szimbólumokat és grafikákat, amelyek kifejezik az utcai kultúra és a lázadó szellemiség esszenciáját.</p>
-          <h2>Fashionhub a médiában</h2>
-        <p>A márka népszerűsége a közösségi média és a hírességek által történő támogatásának köszönhetően jelentősen megnőtt az elmúlt évek során. Olyan hírességek is viseltek már Fashionhub ruhákat, mint Rihanna, Jay-Z és Kanye West, ami tovább növelte a márka elismertségét és vonzerejét a divatvilágban.</p>
-          <h2>Kollekciók</h2>
-        <p>A Fashionhub kollekciói közé tartoznak pulóverek, pólók, kabátok, sapkák és kiegészítők, amelyeket rendszeresen frissítenek az új stílusok és trendek tükrözésére. A márkára jellemző az innováció és a kreativitás, amelyek egyesítik az utcakultúrát és a divatot egy egyedülálló és megkülönböztető stílusban.</p>
-      </div>
-      <div>
-        <img src="images/aboutt.png" style="object-fit: cover" class="bigimg"/>
-      </div>
+            Our company is committed to providing top-notch services and products to our customers. 
+            With a dedicated team of professionals, we aim to exceed expectations and deliver value in everything we do.
+        </p>
+        <p>
+            Established in [Year], we have grown to become a trusted name in the industry. Our mission is to innovate 
+            and lead with integrity, fostering long-lasting relationships with our clients and partners.
+        </p>
+        <p>
+            Thank you for choosing us and being a part of our journey.
+        </p>
     </div>
-  </body>
+</body>
 </html>
