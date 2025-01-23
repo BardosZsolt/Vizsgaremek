@@ -32,14 +32,6 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
             } else {
                 echo "<p style='width: 5rem; color: red; font-size: 1rem;'>".$_SESSION["unick"]."</p>";
             }
-            if(isset($_SESSION["role"])){
-                if($_SESSION["role"] == "admin"){
-                    echo '<a href="./?p=admin">Admin panel</a>';
-                }
-                else {
-                    echo "";
-                }
-            }
             
             ?>
             <div class="submenu">
@@ -50,6 +42,14 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 } else {
                     echo '<a href="kijelentkezes.php">Log out</a>';
                 }
+                if(isset($_SESSION["role"])){
+                if($_SESSION["role"] == "admin"){
+                    echo '<a href="./?p=admin">Admin panel</a>';
+                }
+                else {
+                    echo "";
+                }
+            }
                 ?>
             </div>
         </li>

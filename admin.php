@@ -8,9 +8,13 @@ if (!isset($_SESSION['uid']) || $_SESSION['role'] !== 'admin') {
 
 include "kapcsolat.php";  // Az adatbázis kapcsolat betöltése
 
-// Termékek listázása
-$sql = "SELECT * FROM products";
-$result = $db->query($sql);
+// Termékek lekérdezése
+$sql_products = "SELECT * FROM products";
+$result_products = $db->query($sql_products);
+
+// Kommentek lekérdezése
+$sql_comments = "SELECT * FROM comments ORDER BY created_at DESC";
+$result_comments = $db->query($sql_comments);
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +23,7 @@ $result = $db->query($sql);
     <meta charset="UTF-8">
     <title>Admin Felület</title>
     <style>
+        /* Az admin stílusai */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -71,12 +76,15 @@ $result = $db->query($sql);
         a {
             text-decoration: none;
         }
+        h2{
+            color:white;
+        }
     </style>
 </head>
 <body>
-    <h1>Admin Interface - Manage products</h1>
+    <h1>Admin Felület</h1>
 
-    <h2>Termékek listája</h2>
+    <h2>Termékek kezelése</h2>
 
     <table>
         <tr>
@@ -84,11 +92,11 @@ $result = $db->query($sql);
             <th>Leírás</th>
             <th>Ár</th>
             <th>Kép</th>
-            <th>Modsítások</th>
+            <th>Műveletek</th>
         </tr>
         <?php
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+        if ($result_products->num_rows > 0) {
+            while ($row = $result_products->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>" . htmlspecialchars($row['pname']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['pdescription']) . "</td>";
@@ -101,9 +109,42 @@ $result = $db->query($sql);
                 echo "</tr>";
             }
         } else {
-            echo "<tr><td colspan='5' class='no-products'>Nincsenek termékek.</td></tr>";
+            echo "<tr><td colspan='5'>Nincsenek termékek.</td></tr>";
         }
         ?>
     </table>
+
+    <h2>Kommentek kezelése</h2>
+
+<table>
+    <tr>
+        <th>Üzenet</th>
+        <th>Dátum</th>
+        <th>Admin Válasz</th>
+        <th>Műveletek</th>
+    </tr>
+    <?php
+    if ($result_comments->num_rows > 0) {
+        while ($comment = $result_comments->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . htmlspecialchars($comment['message']) . "</td>";
+            echo "<td>" . htmlspecialchars($comment['created_at']) . "</td>";
+            echo "<td>" . ($comment['reply'] ? htmlspecialchars($comment['reply']) : "Nincs válasz") . "</td>";
+            echo "<td>
+                    <form method='post' action='reply_to_comment.php'>
+                        <textarea name='reply' placeholder='Írj választ...' required>" . htmlspecialchars($comment['reply']) . "</textarea>
+                        <input type='hidden' name='comment_id' value='" . $comment['id'] . "'>
+                        <button type='submit'>Mentés</button>
+                    </form>
+                    <a href='delete_comment.php?id=" . $comment['id'] . "'><button>Törlés</button></a>
+                </td>";
+            echo "</tr>";
+        }
+    } else {
+        echo "<tr><td colspan='4'>Nincsenek kommentek.</td></tr>";
+    }
+    ?>
+</table>
+
 </body>
 </html>

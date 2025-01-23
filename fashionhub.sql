@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Jan 22. 14:43
+-- Létrehozás ideje: 2025. Jan 23. 11:24
 -- Kiszolgáló verziója: 10.4.6-MariaDB
 -- PHP verzió: 7.3.8
 
@@ -67,6 +67,28 @@ CREATE TABLE `categories` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL,
+  `message` text COLLATE utf8_hungarian_ci NOT NULL,
+  `consent` tinyint(1) NOT NULL,
+  `reply` text COLLATE utf8_hungarian_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `nick` varchar(64) COLLATE utf8_hungarian_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `comments`
+--
+
+INSERT INTO `comments` (`id`, `message`, `consent`, `reply`, `created_at`, `nick`) VALUES
+(6, 'teszt', 1, 'teszt vÃ¡lasz', '2025-01-23 10:18:51', 'asd');
 
 -- --------------------------------------------------------
 
@@ -150,7 +172,8 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`pid`, `pname`, `pdescription`, `price`, `pstock`, `pimage_url`, `pcategory_id`, `pcreated_at`, `pupdated_at`) VALUES
 (2, 'shrek', 'ubi', '111.00', 2, 'https://offmedia.hu/wp-content/uploads/2023/04/shrek4_disneyscreencaps.com_675.0.jpg', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(5, 'tibi csoki', 'tejes', '1000.00', 2, 'https://evedd.hu/img/74418/4823077639890/4823077639890.webp', 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(5, 'tibi csoki', 'tejes', '1000.00', 2, 'https://evedd.hu/img/74418/4823077639890/4823077639890.webp', 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(7, 'dildo', 'nagyon nagy', '1000.00', 2, 'https://as2.ftcdn.net/v2/jpg/05/90/90/73/1000_F_590907330_hH38Fo2be9dChYhZY62WTDJtG2G6zCSm.jpg', 1, '2025-01-22 00:00:00', '2025-01-22 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -193,6 +216,12 @@ ALTER TABLE `cart`
 -- A tábla indexei `categories`
 --
 ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `comments`
+--
+ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -242,6 +271,12 @@ ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT a táblához `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT a táblához `login`
 --
 ALTER TABLE `login`
@@ -263,7 +298,7 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT a táblához `products`
 --
 ALTER TABLE `products`
-  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT a táblához `user`
