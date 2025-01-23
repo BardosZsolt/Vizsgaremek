@@ -40,7 +40,7 @@
             padding-top: 100vh;
             font-family: Arial, sans-serif;
             margin: 0;
-            background-color: #222; /* Háttérszín a szöveg kiemeléséhez */
+            background-color: #222;
         }
 
         .content {
@@ -116,6 +116,70 @@
         .contact-form button:hover {
             background-color: #777;
         }
+
+        .comments-section {
+            margin: 40px 0;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 8px;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .comments-section h2 {
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+        .comments-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 400px;
+            overflow-y: auto;
+            border-top: 1px solid #555;
+        }
+
+        .comments-section li {
+            display: flex;
+            flex-direction: column;
+            background-color: #444;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .comments-section li:nth-child(even) {
+            background-color: #555;
+        }
+
+        .comments-section p {
+            margin: 5px 0;
+        }
+
+        .comments-section p strong.user {
+            color: #32cd32; /* Zöld szín a felhasználó neve számára */
+        }
+
+        .comments-section p strong.admin {
+            color: #ffcc00; /* Sárga szín az admin neve számára */
+        }
+
+        .comments-section p.admin-reply {
+            margin-top: 10px;
+            color: #ffcc00; /* Sárga szín az admin válaszokhoz */
+        }
+
+        .comments-section small {
+            text-align: right;
+            font-size: 0.8em;
+            color: #aaa;
+        }
     </style>
 </head>
 <body>
@@ -135,6 +199,7 @@
         <p>
             Thank you for choosing us and being a part of our journey.
         </p>
+        <br><br>
         
         <h2>Our Location</h2>
         <p>We are located in the heart of Budapest, a city rich in culture and history. Visit us to experience our services firsthand.</p>
@@ -148,8 +213,7 @@
         </div>
 
         <?php
-        
-        if(isset($_SESSION["unick"])){
+        if (isset($_SESSION["unick"])) {
             echo '<div class="contact-form">
         <h2>Contact Us</h2>
         <form action="write_comment.php" method="post">
@@ -159,39 +223,39 @@
                 <input type="checkbox" id="consent" name="consent">
                 I agree to share my feedback with the company.
             </label>
-            <input type="text" name="nick" style="display: none;" value="'.$_SESSION["unick"].'">
+            <input type="text" name="nick" style="display: none;" value="' . $_SESSION["unick"] . '">
             <button type="submit">Submit</button>
         </form>
     </div>
     <div class="comments-section">';
         }
-        
-
         ?>
 
-        
-    <h2>Felhasználói Kommentek</h2>
-    <ul>
-        <?php
-        include "kapcsolat.php";
-        $comments_sql = "SELECT message, reply, created_at, nick FROM comments ORDER BY created_at DESC";
-        $comments_result = $db->query($comments_sql);
+        <h2>User Comments</h2>
+        <ul>
+            <?php
+            include "kapcsolat.php";
+            $comments_sql = "SELECT message, reply, created_at, nick FROM comments ORDER BY created_at DESC";
+            $comments_result = $db->query($comments_sql);
 
-        if ($comments_result->num_rows > 0) {
-            while ($comment = $comments_result->fetch_assoc()) {
-                echo "<li>";
-                echo "<p><strong>".$comment['nick'].":</strong> " . htmlspecialchars($comment['message']) . "</p>";
-                echo "<p><strong>Admin:</strong> " . ($comment['reply'] ? htmlspecialchars($comment['reply']) : "Még nincs válasz") . "</p>";
-                echo "<small><em>" . htmlspecialchars($comment['created_at']) . "</em></small>";
-                echo "</li>";
+            if ($comments_result->num_rows > 0) {
+                while ($comment = $comments_result->fetch_assoc()) {
+                    echo "<li>";
+                    echo "<p><strong class='user'>" . htmlspecialchars($comment['nick']) . ":</strong> " . htmlspecialchars($comment['message']) . "</p>";
+                    if ($comment['reply']) {
+                        echo "<p class='admin-reply'><strong class='admin'>Admin (" . htmlspecialchars($comment['nick']) . "):</strong> " . htmlspecialchars($comment['reply']) . "</p>";
+                    } else {
+                        echo "<p><strong class='admin'>Admin:</strong> Még nincs válasz</p>";
+                    }
+                    echo "<small><em>" . htmlspecialchars($comment['created_at']) . "</em></small>";
+                    echo "</li>";
+                }
+            } else {
+                echo "<p>Még nincsenek kommentek.</p>";
             }
-        } else {
-            echo "<p>Még nincsenek kommentek.</p>";
-        }
-        ?>
-    </ul>
-</div>
+            ?>
+        </ul>
     </div>
-    
+    </div>
 </body>
 </html>
