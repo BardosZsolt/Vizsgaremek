@@ -213,7 +213,7 @@
         </div>
 
         <?php
-        if (isset($_SESSION["unick"])) {
+
             echo '<div class="contact-form">
         <h2>Contact Us</h2>
         <form action="write_comment.php" method="post">
@@ -227,10 +227,10 @@
             <button type="submit">Submit</button>
         </form>
     </div>
-    <div class="comments-section">';
-        }
+    ';
+        
         ?>
-
+        <div class="comments-section">
         <h2>User Comments</h2>
         <ul>
             <?php
