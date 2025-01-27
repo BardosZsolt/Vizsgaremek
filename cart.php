@@ -109,15 +109,15 @@ $total = 0;
             <tbody>
                 <?php foreach ($_SESSION['cart'] as $item): ?>
                     <?php 
-                    $itemTotal = $item['price'] * $item['quantity'];
-                    $total += $itemTotal;
+                    $itemTotal = $item['price'];
+                    $total += $item['price'];
                     ?>
                     <tr>
                         <td><?php echo $item['name']; ?></td>
                         <td><?php echo $item['size']; ?></td>
                         <td><?php echo $item['quantity']; ?></td>
                         <td>£<?php echo number_format($item['price'], 2); ?></td>
-                        <td>£<?php echo number_format($itemTotal, 2); ?></td>
+                        <td>£<?php echo number_format($itemTotal, 2) ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

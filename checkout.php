@@ -160,74 +160,82 @@ if (!isset($_SESSION['cart'])) {
                 </tr>
             </thead>
             <tbody>
-                <?php 
-                $total = 0;
-                foreach ($_SESSION['cart'] as $item): 
-                    $itemTotal = $item['price'] * $item['quantity'];
-                    $total += $itemTotal;
-                ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($item['name']); ?></td>
-                    <td><?php echo htmlspecialchars($item['size']); ?></td>
-                    <td><?php echo $item['quantity']; ?></td>
-                    <td>£<?php echo number_format($item['price'], 2); ?></td>
-                    <td>£<?php echo number_format($itemTotal, 2); ?></td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
+            <?php 
+    $total = 0;
+    if (empty($_SESSION['cart'])) {
+        echo '<tr><td colspan="5">The cart is empty.</td></tr>';
+    } else {
+        foreach ($_SESSION['cart'] as $item): 
+            $item['price'] = is_numeric($item['price']) ? $item['price'] : 0;
+            $item['quantity'] = is_numeric($item['quantity']) ? $item['quantity'] : 1;
+            $item['total_price'] = $item['price'] + $item['quantity']; // A total_price mostantól a teljes ár lesz
+            $total += $item['total_price']; // Az összesítéshez a teljes árat adjuk
+    ?>
+    <tr>
+        <td><?php echo htmlspecialchars($item['name']); ?></td>
+        <td><?php echo htmlspecialchars($item['size']); ?></td>
+        <td><?php echo $item['quantity']; ?></td>
+        <td>£<?php echo number_format($item['price'], 2); ?></td> <!-- Egy darab ára -->
+        <td>£<?php echo number_format($item['total_price'], 2); ?></td> <!-- Teljes ár -->
+    </tr>
+    <?php endforeach; 
+    }?>
+
+</tbody>
         </table>
         <h2>Final amount: £<?php echo number_format($total, 2); ?></h2>
 
         <h1>Shipping and Payment Information</h1>
         <form action="confirm_purchase.php" method="POST">
-    <label for="name">Full name:</label>
-    <input type="text" id="name" name="name" required>
+            <label for="name">Full name:</label>
+            <input type="text" id="name" name="name" required>
 
-    <label for="email">E-mail address:</label>
-    <input type="email" id="email" name="email" required>
+            <label for="email">E-mail address:</label>
+            <input type="email" id="email" name="email" required>
 
-    <label for="zipcode">Postal code:</label>
-    <input type="text" id="zipcode" name="zipcode" oninput="fetchCity()" required>
+            <label for="zipcode">Postal code:</label>
+            <input type="text" id="zipcode" name="zipcode" oninput="fetchCity()" required>
 
-    <label for="city">City:</label>
-    <input type="text" id="city" name="city" required>
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required>
 
-    <label for="address">Address:</label>
-    <input type="text" id="address" name="address" required>
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
 
-    <label for="payment">Payment Method:</label>
-    <select id="payment" name="payment" onchange="toggleCardFields()" required>
-        <option value="cash">After delivery payment</option>
-        <option value="card">Card</option>
-    </select>
+            <label for="payment">Payment Method:</label>
+            <select id="payment" name="payment" onchange="toggleCardFields()" required>
+                <option value="cash">After delivery payment</option>
+                <option value="card">Card</option>
+            </select>
 
-    <!-- Bankkártyaadatok -->
-    <div id="card-fields" style="display: none;">
-        <label for="card-number">Card Number:</label>
-        <input type="text" id="card-number" name="card_number" pattern="\d{16}" placeholder="1234 5678 9012 3456">
+            <!-- Bankkártyaadatok -->
+            <div id="card-fields" style="display: none;">
+                <label for="card-number">Card Number:</label>
+                <input type="text" id="card-number" name="card_number" pattern="\d{16}" placeholder="1234 5678 9012 3456">
 
-        <label for="expiry-date">Expiry Date:</label>
-        <input type="text" id="expiry-date" name="expiry_date" pattern="\d{2}/\d{2}" placeholder="MM/YY">
+                <label for="expiry-date">Expiry Date:</label>
+                <input type="text" id="expiry-date" name="expiry_date" pattern="\d{2}/\d{2}" placeholder="MM/YY">
 
-        <label for="cvv">CVV:</label>
-        <input type="text" id="cvv" name="cvv" pattern="\d{3}" placeholder="123">
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" name="cvv" pattern="\d{3}" placeholder="123">
+            </div>
+
+            <button type="submit">Purchase confirmation</button>
+        </form>
+
+        <script>
+            function toggleCardFields() {
+                const paymentMethod = document.getElementById('payment').value;
+                const cardFields = document.getElementById('card-fields');
+
+                if (paymentMethod === 'card') {
+                    cardFields.style.display = 'block';
+                } else {
+                    cardFields.style.display = 'none';
+                }
+            }
+        </script>
+
     </div>
-
-    <button type="submit">Purchase confirmation</button>
-</form>
-
-<script>
-    function toggleCardFields() {
-        const paymentMethod = document.getElementById('payment').value;
-        const cardFields = document.getElementById('card-fields');
-
-        if (paymentMethod === 'card') {
-            cardFields.style.display = 'block';
-        } else {
-            cardFields.style.display = 'none';
-        }
-    }
-</script>
-
 </body>
 </html>
