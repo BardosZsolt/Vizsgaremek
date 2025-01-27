@@ -345,100 +345,85 @@ th:last-child{
 
 /* Modal styles */
 .modal {
-    display: none;
+    display: none; /* Alapértelmezés szerint rejtve */
     position: fixed;
-    top: 0;
+    z-index: 1000;
     left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Áttetsző háttér */
+    display: flex; /* Középre igazításhoz */
+    justify-content: center;
+    align-items: center;
 }
 
 .modal-content {
+    display: flex; /* Vízszintes elrendezés */
+    align-items: center;
     background-color: #fff;
-    margin: 10% auto;
+    border-radius: 10px;
+    width: 90%; /* Reszponzív méret */
+    max-width: 600px; /* Maximális szélesség */
     padding: 20px;
-    width: 80%;
-    max-width: 800px; /* Növeltem a modal szélességét */
-    position: relative;
-    display: flex; /* Flexbox használata a kép és a leírás oldalra helyezéséhez */
-    text-align: left; /* Balra igazítás */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    animation: scaleIn 0.3s ease-in-out;
 }
 
-.modal-content img {
-    width: 50%; /* A kép szélessége 50% */
-    height: auto;
-    margin-right: 20px; /* Térköz a kép és a leírás között */
+.modal-left {
+    flex: 1; /* A kép aránya */
+    text-align: center;
 }
 
-.modal-content h2,
-.modal-content p {
-    font-size: 1.2em;
-    color: #000;
-    font-weight: bold; /* Kiemelés vastag betűvel */
+.modal-left img {
+    max-width: 100%; /* Kép méretezése */
+    max-height: 150px; /* Limitáljuk a kép magasságát */
+    border-radius: 5px;
 }
 
-.modal-content p {
-    color: #555;
-    font-size: 1em;
-}
-
-.modal-content select {
-    margin-top: 15px;
-    padding: 5px;
-    width: 100%;
-}
-
-.modal-content button {
-    margin-top: 15px;
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
 .modal-right {
-    width: 50%;
+    flex: 2; /* Szöveg aránya */
+    padding-left: 15px; /* Térköz a kép mellett */
+    display: flex;
+    flex-direction: column; /* Szövegek és gombok egymás alatt */
+    justify-content: center;
 }
 
-.modal-right h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    color: #000;
-    font-weight: bold;
-}
-
-.modal-right p {
-    font-size: 1.2em;
-    color: #000;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.modal-right select,
-.modal-right input[type="number"] {
-    margin-top: 15px;
-    padding: 5px;
-    width: 100%;
-    font-size: 1em;
-}
-
-.modal-right button {
-    margin-top: 15px;
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    border: none;
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    color: #333;
     cursor: pointer;
+    background: none;
+    border: none;
+    font-weight: bold;
 }
 
-.modal-right .description {
-    margin-top: 15px;
-    font-size: 1em;
-    color: #555;
-    font-weight: normal;
+.close:hover {
+    color: red; /* Hover hatás */
 }
+
+.description {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Animáció a megjelenéshez */
+@keyframes scaleIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
 
 /* Üres kosár - alap stílus */
 .empty-cart {

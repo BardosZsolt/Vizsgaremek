@@ -19,11 +19,12 @@
 <body>
 
 <!-- Modal for enlarged product view -->
-<div id="modal" class="modal">
+<!-- Modal for enlarged product view -->
+<div id="modal" class="modal" style="display: none;">
     <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
+        <button class="close" onclick="closeModal()">×</button>
         <div class="modal-left">
-            <img id="modal-img" src="">
+            <img id="modal-img" src="" alt="Product image">
         </div>
         <div class="modal-right">
             <h2 id="modal-name"></h2>
@@ -36,71 +37,52 @@
                 <option>XL</option>
             </select>
 
-            <!-- Quantity selector -->
+            <!-- Quantity input -->
             <label for="quantity">Quantity:</label>
             <input type="number" id="quantity" value="1" min="1" onchange="updatePrice()">
 
-            <button class="btn" onclick="addToCart()">Add to Cart</button> 
+            <button class="btn" onclick="addToCart()">Add to Cart</button>
 
-            <!-- Termék leírása -->
+            <!-- Product description -->
             <p id="modal-description" class="description"></p>
         </div>
     </div>
 </div>
 
-
-
-<!---------FEATURED PRODUCTS-----------> 
+<!-- Featured Products Section -->
 <div class="small-container">
-<select>
-            <option>Default Shorting</option>
-            <option>Sort by price</option>
-            <option>Sort by popularity</option>
-            <option>Sort by rating</option>
-            <option>Sort by sale</option>
-        </select>
-        
     <h2 class="title">Featured Products</h2>
     <div class="row">
         <div class="col-4">
-            <img src="images/product-5-.png" alt="" onclick="openModal('images/product-5-.png', 'Trapstar Irongate Paisley Tee', 80.00, 'A stylish tee with intricate paisley design, perfect for any casual occasion.')">
+            <img src="images/product-5-.png" alt="Trapstar Irongate Paisley Tee" onclick="openModal('images/product-5-.png', 'Trapstar Irongate Paisley Tee', 80.00, 'A stylish tee with intricate paisley design, perfect for any casual occasion.')">
             <h4>Trapstar Irongate Paisley Tee</h4>
-            
             <p>£80.00</p>
         </div>
         <div class="col-4">
-            <img src="images/product-6.jpg" alt="" onclick="openModal('images/product-6.jpg', 'Trapstar Shooters Tee', 99.75, 'A bold tee with shooters print, ideal for streetwear enthusiasts.')">
+            <img src="images/product-6.jpg" alt="Trapstar Shooters Tee" onclick="openModal('images/product-6.jpg', 'Trapstar Shooters Tee', 99.75, 'A bold tee with shooters print, ideal for streetwear enthusiasts.')">
             <h4>Trapstar Shooters Tee</h4>
-           
             <p>£99.75</p>
         </div>
         <div class="col-4">
-            <img src="images/product-7.jpg" alt="" onclick="openModal('images/product-7.jpg', 'Trapstar Gradient Blue Tee', 50.00, 'A cool blue gradient tee, blending comfort and style.')">
+            <img src="images/product-7.jpg" alt="Trapstar Gradient Blue Tee" onclick="openModal('images/product-7.jpg', 'Trapstar Gradient Blue Tee', 50.00, 'A cool blue gradient tee, blending comfort and style.')">
             <h4>Trapstar Gradient Blue Tee</h4>
-            
             <p>£50.00</p>
         </div>
         <div class="col-4">
-            <img src="images/product-8.jpg" alt="" onclick="openModal('images/product-8.jpg', 'Trapstar Decoded Tee', 45.00, 'A decoded design tee with a modern look, made for comfort and style.')">
+            <img src="images/product-8.jpg" alt="Trapstar Decoded Tee" onclick="openModal('images/product-8.jpg', 'Trapstar Decoded Tee', 45.00, 'A decoded design tee with a modern look, made for comfort and style.')">
             <h4>Trapstar Decoded Tee</h4>
-          
             <p>£45.00</p>
         </div>
-        <!-- Dinamikus termékek (adatbázisból betöltve) -->
+
+        <!-- Dynamic products from the database -->
         <?php
         include "kapcsolat.php";
-
-
-
-        // Kapcsolat ellenőrzése
         if ($db->connect_error) {
             die("Connection failed: " . $db->connect_error);
         }
 
-        // Termékek lekérdezése
         $sql = "SELECT pname, price, pimage_url, pdescription FROM products WHERE pcategory_id = 1";
         $result = $db->query($sql);
-
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo '<div class="col-4">';
@@ -112,13 +94,10 @@
         } else {
             echo "<p>No additional products found in the database.</p>";
         }
-
         $db->close();
         ?>
     </div>
-</div>
-
-<h2 class="title">Latest Products</h2>
+    <h2 class="title">Latest Products</h2>
 <div class="row">
     <!-- Statikus termékek -->
     <div class="col-4">
@@ -141,9 +120,9 @@
         <h4>Trapstar 'Script' Tee</h4>
         <p>£115.00</p>
     </div>
+</div>
 
-    <!-- Dinamikus termékek (adatbázisból betöltve) -->
-    <?php
+<?php
     include "kapcsolat.php";
 
 
@@ -171,7 +150,6 @@
 
     $db->close();
     ?>
-</div>
 
 <div class="page-btn">
         <span>1</span>
@@ -185,20 +163,51 @@
     let currentPrice = 0;
 
     function openModal(image, name, price, description) {
+        // Töltse fel a modal tartalmát
         document.getElementById("modal-img").src = image;
         document.getElementById("modal-name").innerText = name;
         document.getElementById("modal-price").innerText = "£" + price;
         document.getElementById("modal-description").innerText = description;
-        document.getElementById("modal").style.display = "block";
+
+        // Modal megjelenítése
+        document.getElementById("modal").style.display = "flex";
+
+        // Ár mentése és frissítése
         currentPrice = price;
         updatePrice();
+
+        // ESC gombhoz hallgató hozzáadása
+        document.addEventListener("keydown", handleKeyDown);
+
+        // A modal körüli területre kattintásra is bezárjuk
+        document.getElementById("modal").addEventListener("click", closeModalOnClickOutside);
     }
 
     function closeModal() {
+        // Modal elrejtése
         document.getElementById("modal").style.display = "none";
+
+        // Hallgató eltávolítása
+        document.removeEventListener("keydown", handleKeyDown);
+        document.getElementById("modal").removeEventListener("click", closeModalOnClickOutside);
+    }
+
+    function closeModalOnClickOutside(event) {
+        // Ha a modalon kívül kattintanak, zárjuk be
+        if (event.target === document.getElementById("modal")) {
+            closeModal();
+        }
+    }
+
+    function handleKeyDown(event) {
+        // Ha ESC-et nyomnak, zárjuk be a modalt
+        if (event.key === "Escape") {
+            closeModal();
+        }
     }
 
     function updatePrice() {
+        // Frissítse az árat a darabszám alapján
         const quantity = document.getElementById("quantity").value;
         const totalPrice = currentPrice * quantity;
         document.getElementById("modal-price").innerText = "£" + totalPrice.toFixed(2);
@@ -211,10 +220,11 @@
         const quantity = parseInt(document.getElementById("quantity").value);
 
         if (size === "Select Size") {
-            alert("Kérlek, válassz méretet!");
+            alert("Please select a size!");
             return;
         }
 
+        // Add to cart API call
         fetch("cart_action.php", {
             method: "POST",
             headers: {
@@ -232,22 +242,14 @@
         .then(data => {
             if (data.status === "success") {
                 alert(data.message);
-                updateCartCount();
             } else {
                 alert(data.message);
             }
         })
-        .catch(error => console.error("Hiba:", error));
+        .catch(error => console.error("Error:", error));
     }
-    
-
-    function updateCartCount() {
-        // This function should update the cart count in the navigation bar or other parts of the page.
-    }
-
-
-    
 </script>
+
 
 </body>
 </html>
