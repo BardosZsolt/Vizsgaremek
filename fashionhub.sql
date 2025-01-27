@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Jan 23. 11:24
+-- Létrehozás ideje: 2025. Jan 27. 12:52
 -- Kiszolgáló verziója: 10.4.6-MariaDB
 -- PHP verzió: 7.3.8
 
@@ -88,7 +88,7 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `message`, `consent`, `reply`, `created_at`, `nick`) VALUES
-(6, 'teszt', 1, 'teszt vÃ¡lasz', '2025-01-23 10:18:51', 'asd');
+(7, 'halo', 1, 'szÃ©p napot', '2025-01-27 10:49:05', 'ubi');
 
 -- --------------------------------------------------------
 
@@ -200,7 +200,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`uid`, `uemail`, `unick`, `upw`, `ubirth`, `udate`, `uip`, `usession`, `ustatus`, `ucomment`, `role`) VALUES
-(15, 'asd@gmail.com', 'asd', 'b23cf2d0fb74b0ffa0cf4c70e6e04926', '2024-10-11', '2024-10-02 12:47:05', '', '', '', '', 'admin');
+(15, 'asd@gmail.com', 'asd', 'b23cf2d0fb74b0ffa0cf4c70e6e04926', '2024-10-11', '2024-10-02 12:47:05', '', '', '', '', 'admin'),
+(16, 'ubi@gmail.com', 'ubi', 'fb9f6712075108573eef5ef4b0795191', '0000-00-00', '2025-01-27 11:48:49', '', '', '', '', 'user');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -274,7 +275,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT a táblához `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT a táblához `login`
@@ -304,7 +305,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT a táblához `user`
 --
 ALTER TABLE `user`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
