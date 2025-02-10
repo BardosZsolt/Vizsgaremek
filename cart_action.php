@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Kosár tartalom számának frissítése és visszaküldése JSON-ban
                 $count = count($_SESSION['cart']);
                 echo json_encode(["status" => "success", "message" => "Termék hozzáadva a kosárhoz.", "cartCount" => $count]);
+            
             } else {
                 echo json_encode(["status" => "error", "message" => "Hibás termékadatok."]);
             }

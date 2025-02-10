@@ -21,30 +21,45 @@ session_start();
   </style>
   <div class="container">
     <div class="navbar">
-      <?php include("navbar.php"); ?>
-      <?php include("footer.php") ?>  
+      <?php  ?>
+       
     </div>
     <?php
       // Az oldal kiválasztása az URL-ből
       $p = isset($_GET['p']) ? $_GET['p'] : "";
 
       // Tartalom betöltése a "p" paraméter alapján
-      switch ($p) {
+    include("navbar.php");
+    if (strpos($p, "admin") !== false) {
+      include("./admin/admin-navbar.php");
+  }
+       switch ($p) {
         case "shop":
           include("shop.php");
           break;
         case "about":
           include("about.php");
           break;
-        case "admin":
-          include("admin.php");
-          break;
-        default:
-          include("kezdolap.php"); // Alapértelmezett kezdőlap
-          break;
-
-          
+          case "admin":
+            include("./admin/admin.php");
+            break;
+              case "admin-product-upload":
+                  include("./admin/admin-product-upload.php");
+                  break;
+  
+                  case "admin-comment-edit":
+                      include("./admin/admin-comment-edit.php");
+                      break;
+  
+                      case "admin-summary":
+                          include("./admin/admin-summary.php");
+                          break;
+                          case "admin-product-edit":
+                            include("./admin/admin-product-edit.php");
+                            break;
+           
       }
+      include("footer.php"); 
     ?>
   </div>
 </body>

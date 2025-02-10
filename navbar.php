@@ -175,10 +175,14 @@ nav a:hover {
     background-color: red; /* Piros háttér a kosár számához */
     color: white; /* Fehér színű szám */
     border-radius: 50%;
-    padding: 5px 10px;
     position: absolute;
-    top: -5px;
-    right: -10px;
+    top: 8px;
+    right: 27px;
+    max-width: 20px;
+    max-height: 20px;
+    min-width: 15px;
+    display: grid;
+    place-items: center;
 }
 
 /* Felhasználói státusz színe */
