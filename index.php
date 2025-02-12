@@ -57,6 +57,9 @@ session_start();
                           case "admin-product-edit":
                             include("./admin/admin-product-edit.php");
                             break;
+        default:
+          include("./kezdolap.php");
+          break;
            
       }
       include("footer.php"); 
