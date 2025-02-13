@@ -104,44 +104,80 @@
     </style>
 </head>
 <body>
-    <?php
-    session_start();  // Session indítása
+<?php
+session_start();
+include "kapcsolat.php"; // Adatbázis kapcsolat
 
-    // Kosár ürítése vásárlás után
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        // Kosár kiürítése
-        unset($_SESSION['cart']);
+// Ellenőrizzük, hogy a felhasználó be van-e jelentkezve
+if (!isset($_SESSION['uid'])) {
+    echo "<script>alert('Bejelentkezés szükséges!'); window.location.href = 'bejelentkezes.php';</script>";
+    exit;
+}
 
-        // Űrlap adatok begyűjtése
-        $name = htmlspecialchars($_POST['name']);
-        $email = htmlspecialchars($_POST['email']);
-        $zipcode = htmlspecialchars($_POST['zipcode']);
-        $city = htmlspecialchars($_POST['city']);
-        $address = htmlspecialchars($_POST['address']);
-        $payment = htmlspecialchars($_POST['payment']);
+// Ha nincs termék a kosárban, ne engedje a rendelést
+if (empty($_SESSION['cart'])) {
+    echo "<script>alert('A kosár üres!'); window.location.href = 'index.php';</script>";
+    exit;
+}
 
-        echo "<div class='confirmation'>";
-        echo "<div class='icon'>&#10004;</div>"; // Pipa ikon
-        echo "<h1>Thank you for your purchase!</h1>";
-        echo "<p>Your order details have been successfully recorded.</p>";
+// Felhasználói adatok
+$user_id = (int)$_SESSION['uid'];
+$total_price = (float)$_POST['total_price'];
+$name = htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8'); // Sanitized
+$email = htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8'); // Sanitized
+$zipcode = (int)$_POST['zipcode'];
+$city = htmlspecialchars($_POST['city'], ENT_QUOTES, 'UTF-8'); // Sanitized
+$address = htmlspecialchars($_POST['address'], ENT_QUOTES, 'UTF-8'); // Sanitized
+$payment_method = (int)$_POST['payment'];
+$status = 'F';
+$order_date = date('Y-m-d H:i:s'); // Current timestamp
+$updated_at = date('Y-m-d H:i:s'); // Current timestamp
 
-        echo "<ul>";
-        echo "<li><strong>Name:</strong> $name</li>";
-        echo "<li><strong>E-mail:</strong> $email</li>";
-        echo "<li><strong>Zipcode:</strong> $zipcode</li>";
-        echo "<li><strong>City:</strong> $city</li>";
-        echo "<li><strong>Address:</strong> $address</li>";
-        echo "<li><strong>Payment method:</strong> " . ($payment == 'card' ? 'Card' : 'After delivery payment') . "</li>";
-        echo "</ul>";
+// F - Feldolgozás alatt
+// V - Visszaküldve
+// T - Törölve
+// M - Módosítva (hozzáadtam / töröltem egy terméket)
 
-        echo "<button onclick=\"window.location.href='./?p=shop'\">Back to the store</button>"; 
-        echo "</div>";
-    } else {
-        echo "<div class='confirmation'>";
-        echo "<h1>Hiba történt!</h1>";
-        echo "<p>Az oldal csak POST metódussal érhető el.</p>";
-        echo "</div>";
-    }
-    ?>
+$sql = "INSERT INTO orders (user_id, total_price, order_date, name, email, zipcode, city, address, payment_method, status, updated_at) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+$stmt = $db->prepare($sql);
+
+if ($stmt === false) {
+    die("Prepare Error: " . $db->error . "<br>SQL: " . $sql);
+}
+
+// Corrected bind_param: created_at removed
+$stmt->bind_param("idsisssssis", $user_id, $total_price, $order_date, $name, $email, $zipcode, $city, $address, $payment_method, $status, $updated_at);
+
+if (!$stmt->execute()) {
+    die("Execute Error: " . $stmt->error);
+}
+
+$stmt->execute();
+$order_id = $stmt->insert_id;
+$stmt->close();
+
+// 2️⃣ Termékek mentése az `order_items` táblába
+$stmt = $db->prepare("INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase) VALUES (?, ?, ?, ?)");
+foreach ($_SESSION['cart'] as $item) {
+    $total_price += $item['price'] * $item['quantity'];
+    $stmt->bind_param("iiid", $order_id, $item['product_id'], $item['quantity'], $item['price']);
+    $stmt->execute();
+}
+$stmt->close();
+
+// 3️⃣ Frissítsük a rendelés végösszegét az `orders` táblában
+$stmt = $db->prepare("UPDATE orders SET total_price = ? WHERE id = ?");
+$stmt->bind_param("di", $total_price, $order_id);
+$stmt->execute();
+$stmt->close();
+
+// 4️⃣ Kosár ürítése és sikerüzenet
+unset($_SESSION['cart']);
+echo "<script>alert('Rendelés sikeresen leadva!'); window.location.href = 'index.php';</script>";
+exit;
+?>
+
 </body>
 </html>

@@ -201,6 +201,11 @@ if (!isset($_SESSION['cart'])) {
 
             <label for="address">Address:</label>
             <input type="text" id="address" name="address" required>
+             <!--Teljes ár elmentése-->
+             <input type="hidden" name="total_price" id="total_price" value="<?php echo $total;?>">
+
+
+
 
             <label for="payment">Payment Method:</label>
             <select id="payment" name="payment" onchange="toggleCardFields()" required>
