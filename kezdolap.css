@@ -87,8 +87,11 @@ h1{
 }
 p{
     color: #fff;
-    font-size: 11px;
+    font-size: 18px;
     line-height: 15px;
+    font-family: "Train One", serif;
+    font-weight: 400;
+    font-style: normal;
 }
 button {
     width: 180px;
@@ -130,3 +133,23 @@ ion-icon {
     border-radius: 5px;
     transition: background-color 0.3s ease;
   }
+  nav ul li a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -3px;
+    width: 0;
+    height: 2px;
+    background-color: #fff;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+/* Hover effektus */
+nav ul li a:hover {
+    color: lightblue; /* Szövegszín változtatás */
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+    left: 0;
+}
