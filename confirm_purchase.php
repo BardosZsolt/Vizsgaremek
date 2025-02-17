@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Purchase confirmation</title>
+    <title>Rendelés visszaigazolása</title>
     <style>
-        /* Alap háttér beállítás */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -18,7 +17,6 @@
             min-height: 100vh;
         }
 
-        /* Fő doboz */
         .confirmation {
             max-width: 700px;
             width: 90%;
@@ -30,20 +28,17 @@
             animation: fadeIn 1s ease-in-out;
         }
 
-        /* Animáció a beúszáshoz */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Címsor */
         .confirmation h1 {
             color: #2c3e50;
             font-size: 2em;
             margin-bottom: 10px;
         }
 
-        /* Ikon és Köszönet szöveg */
         .icon {
             font-size: 4em;
             color: #27ae60;
@@ -56,7 +51,6 @@
             margin-bottom: 20px;
         }
 
-        /* Vásárlási adatok */
         .confirmation ul {
             list-style: none;
             padding: 0;
@@ -80,7 +74,6 @@
             color: #000;
         }
 
-        /* Gomb */
         .confirmation button {
             background-color: #4bbbbd;
             color: #fff;
@@ -93,91 +86,84 @@
         }
 
         .confirmation button:hover {
-            background-color: #4bbbbd;
+            background-color: #3696a0;
             transform: scale(1.05);
-        }
-
-
-        .back-link:hover {
-            color: #1565c0;
         }
     </style>
 </head>
 <body>
+
 <?php
 session_start();
-include "kapcsolat.php"; // Adatbázis kapcsolat
+include "kapcsolat.php";
 
-// Ellenőrizzük, hogy a felhasználó be van-e jelentkezve
 if (!isset($_SESSION['uid'])) {
     echo "<script>alert('Bejelentkezés szükséges!'); window.location.href = 'bejelentkezes.php';</script>";
     exit;
 }
 
-// Ha nincs termék a kosárban, ne engedje a rendelést
 if (empty($_SESSION['cart'])) {
     echo "<script>alert('A kosár üres!'); window.location.href = 'index.php';</script>";
     exit;
 }
 
-// Felhasználói adatok
 $user_id = (int)$_SESSION['uid'];
 $total_price = (float)$_POST['total_price'];
-$name = htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8'); // Sanitized
-$email = htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8'); // Sanitized
+$name = htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8');
+$email = htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8');
 $zipcode = (int)$_POST['zipcode'];
-$city = htmlspecialchars($_POST['city'], ENT_QUOTES, 'UTF-8'); // Sanitized
-$address = htmlspecialchars($_POST['address'], ENT_QUOTES, 'UTF-8'); // Sanitized
+$city = htmlspecialchars($_POST['city'], ENT_QUOTES, 'UTF-8');
+$address = htmlspecialchars($_POST['address'], ENT_QUOTES, 'UTF-8');
 $payment_method = (int)$_POST['payment'];
 $status = 'F';
-$order_date = date('Y-m-d H:i:s'); // Current timestamp
-$updated_at = date('Y-m-d H:i:s'); // Current timestamp
-
-// F - Feldolgozás alatt
-// V - Visszaküldve
-// T - Törölve
-// M - Módosítva (hozzáadtam / töröltem egy terméket)
+$order_date = date('Y-m-d H:i:s');
+$updated_at = date('Y-m-d H:i:s');
 
 $sql = "INSERT INTO orders (user_id, total_price, order_date, name, email, zipcode, city, address, payment_method, status, updated_at) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $db->prepare($sql);
-
 if ($stmt === false) {
-    die("Prepare Error: " . $db->error . "<br>SQL: " . $sql);
+    die("Prepare Error: " . $db->error);
 }
 
-// Corrected bind_param: created_at removed
 $stmt->bind_param("idsisssssis", $user_id, $total_price, $order_date, $name, $email, $zipcode, $city, $address, $payment_method, $status, $updated_at);
-
 if (!$stmt->execute()) {
     die("Execute Error: " . $stmt->error);
 }
 
-$stmt->execute();
 $order_id = $stmt->insert_id;
 $stmt->close();
 
-// 2️⃣ Termékek mentése az `order_items` táblába
 $stmt = $db->prepare("INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase) VALUES (?, ?, ?, ?)");
 foreach ($_SESSION['cart'] as $item) {
-    $total_price += $item['price'] * $item['quantity'];
     $stmt->bind_param("iiid", $order_id, $item['product_id'], $item['quantity'], $item['price']);
     $stmt->execute();
 }
 $stmt->close();
 
-// 3️⃣ Frissítsük a rendelés végösszegét az `orders` táblában
 $stmt = $db->prepare("UPDATE orders SET total_price = ? WHERE id = ?");
 $stmt->bind_param("di", $total_price, $order_id);
 $stmt->execute();
 $stmt->close();
 
-// 4️⃣ Kosár ürítése és sikerüzenet
 unset($_SESSION['cart']);
-echo "<script>alert('Rendelés sikeresen leadva!'); window.location.href = 'index.php';</script>";
-exit;
 ?>
+
+<div class="confirmation">
+    <div class="icon">✅</div>
+    <h1>Sikeres rendelés!</h1>
+    <p>Köszönjük, <?php echo $name; ?>! A rendelésed sikeresen rögzítettük.</p>
+    <ul>
+        <li><strong>Rendelési szám:</strong> <?php echo $order_id; ?></li>
+        <li><strong>Név:</strong> <?php echo $name; ?></li>
+        <li><strong>Email:</strong> <?php echo $email; ?></li>
+        <li><strong>Szállítási cím:</strong> <?php echo "$zipcode, $city, $address"; ?></li>
+        <li><strong>Fizetési mód:</strong> <?php echo ($payment_method == 1) ? "Utánvét" : "Bankkártya"; ?></li>
+        <li><strong>Végösszeg:</strong> <?php echo number_format($total_price, 0, ',', ' '); ?> Ft</li>
+    </ul>
+    <button onclick="window.location.href='index.php'">Vissza a főoldalra</button>
+</div>
 
 </body>
 </html>
