@@ -14,11 +14,6 @@ session_start();
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
-  <style>
-    .container {
-      overflow-x: hidden !important;
-    }
-  </style>
   <div class="container">
     <div class="navbar">
       <?php  ?>
